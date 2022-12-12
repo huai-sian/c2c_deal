@@ -2,7 +2,7 @@
   "name": "c2c_deal",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://huai-sian.github.io/Taiwan_Map_React",
+  "homepage": "https://huai-sian.github.io/Pure-Savon-React",
   "dependencies": {
     "@popperjs/core": "^2.11.6",
     "@reduxjs/toolkit": "^1.8.6",
