@@ -1,0 +1,132 @@
+@import "./../../assets/_utilities.scss";
+@import "./../../assets/_mixin.scss";
+
+.checkOut {
+  font-family: 'Noto Sans TC', sans-serif;
+  h3 {
+    margin-top: 1.5rem;
+    font-size: 1.4rem;
+  }
+  .listRow {
+    padding-bottom: 4rem;
+    .order {
+      border: 1px solid $primary_color;
+      border-radius: $radius;
+      padding: 1.5rem;
+      margin-top: 1rem;
+      font-size: 1rem;
+      list-style: none;
+      p {
+        padding: 5px;
+      }
+      .orderList {
+        padding: 5px 15px;
+        margin-bottom: 5px;
+        .pro-title {
+          padding: 5px;
+          cursor: pointer;
+          &:hover {
+            color: $secondary_color;
+          }
+        }
+        .pro-qty {
+          padding: 5px;
+          text-align: center;
+        }
+        .pro-price {
+          text-align: right;
+          padding: 5px;
+        }
+      }
+      .summaryBlock {
+        border-top: 1px solid rgb(207, 205, 205);
+        .summaryList {
+          padding: 5px 15px;
+          margin-bottom: 5px;
+          .summary {
+            text-align: right;
+          }
+        }
+      }
+    }
+    .typo__center {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .card_support {
+      align-items: center;
+      .imagefr {
+        width:2.1rem;
+        height: 2.3rem;
+        margin:0 5px;
+      }
+    }
+  }
+  .order_info {
+    padding: 0.5rem 1rem;
+    border: 1px solid $primary_color;
+    border-radius: $radius;
+    margin-top: 1rem;
+    font-size: 1rem;
+    .h3 {
+      margin: 10px;
+      margin-left: 0;
+      font-weight: 400;
+    }
+    table td {
+      padding: 1rem;
+      &:incomplete {
+        font-weight: 500;
+        color: rgb(199, 75, 75);
+      }
+      &:complete {
+        font-weight: 500;
+        color: rgb(87, 175, 87);
+      }
+    }
+    .form_card {
+      label {
+        margin-bottom: 0.5rem;
+      }
+    }
+    .endpay {
+      margin-top: 1rem;
+      text-align: right;
+      button {
+        background-color: $primary_color;
+        color: white;
+        border: none;
+        outline: none;
+        padding: 7px 15px;
+        border-radius: $radius;
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+        animation: btn_animation  1s infinite;
+        cursor: pointer;
+        &:hover {
+          background-color: $secondary_color;
+        }
+        @include medium {
+          @include unhover;
+        }
+      }
+    }
+  }
+}
+.modal-header {
+  background-color: $primary_color;
+  color: white
+}
+#endPayModal .modal-body {
+  h3 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+    font-size: 1.3rem;
+  }
+  i {
+    font-size: 120px;
+    color: $secondary_color;
+    text-align: center;
+  }
+}

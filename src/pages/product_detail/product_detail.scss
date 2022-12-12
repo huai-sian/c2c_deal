@@ -1,0 +1,298 @@
+@import "./../../assets/_utilities.scss";
+@import "./../../assets/_mixin.scss";
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+}
+.product_detail input[type=number] {
+  -moz-appearance: textfield;
+}
+.product_detail {
+  font-family: 'Noto Sans TC', sans-serif;
+  .breadmark {
+    position: absolute;
+    left: 5%;
+    bottom: 15%;
+    margin: 0 3rem; 
+    .breadcrumb {
+      background: transparent;
+      .breadcrumb-item {
+        cursor: pointer;
+        color: black;
+        font-size: 1.1rem;
+        @include x-small {
+          font-size: 1rem;
+        }
+        &.active {
+          cursor: default;
+          color: $secondary_color;
+        }
+        a {
+          color: black;
+          &:hover {
+            text-decoration: none;
+            color: $primary_color;
+          }
+        }
+      }
+    }
+    @include x-small {
+      left: 2%;
+      margin: 0 1rem;
+    }
+  }
+  .product_info {
+    padding-bottom: 3rem;
+    .product_pic {
+      position: relative;
+      height: 80%;
+      padding-bottom: 75%;
+      img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: -10%;
+        object-fit: cover;
+        object-position: 50% 50%;
+        border: 10px solid $white_txt;
+        @include medium {
+          top: 0%;
+        }
+        @include small {
+          top: -10%;
+        }
+      }
+    }
+    .product_meta {
+      list-style: none;
+      @include x-small {
+        padding: 0 1.5rem;
+      }
+      .numControl {
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
+        .btn-minus {
+          border: 1px solid $primary_color;
+          color: $primary_color;
+          padding: 6px 8px;
+          padding-top: 7px;
+          border-radius: 4px 0 0 4px;
+          outline: none;
+          background: transparent;
+          &:hover {
+            color: $secondary_color;
+          }
+          &:focus {
+            color: $secondary_color;
+            outline: none;
+          }
+        }
+        .btn-plus {
+          border: 1px solid $primary_color;
+          padding: 6px 8px;
+          padding-top: 7px;
+          border-radius: 0 4px 4px 0;
+          color: $primary_color;
+          outline: none;
+          background: transparent;
+          &:hover {
+            color: $secondary_color;
+          }
+          &:focus {
+            color: $secondary_color;
+            outline: none;
+          }
+        }
+        .amount {
+          border: 1px solid $primary_color;
+          padding: 4px 8px;
+          margin: 0;
+          outline: none;
+          text-align: center;
+          border-radius: none;
+          width: 4.5rem;
+          &:focus {
+            border: 1px solid $secondary_color;
+          }
+        }
+      }
+      h3 {
+        font-size: 1.7rem;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+        @include x-small {
+          margin-top: 0rem;
+        }
+      }
+      .origin_pricesolo {
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+      }
+      .product_detail .origin_price {
+        font-size: 1.1rem;
+        font-weight: 300;
+      }
+      .salesprice {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        margin-top: 0.5rem;
+      }
+      .btn-cart {
+        background-color: $primary_color;
+        color: $white_txt;
+        margin-bottom: 1rem;
+        border-radius: $radius;
+        border: none;
+        outline: none;
+        padding: 6px 15px;
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+        &:hover {
+          background-color: $secondary_color;
+        }
+        @include medium {
+          @include unhover;
+        }
+      }
+      .product_des {
+        font-size: 1rem;
+        line-height: 1.5rem;
+      }
+      .product_con {
+        font-size: 1rem;
+        margin-top: 6px;
+        line-height: 1.3rem;
+      }
+    }
+  }
+  .related {
+    margin-top: 1.5rem;
+    @include x-small {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+    h3 {
+      font-size: 1.3rem;
+      padding-left: 1.5rem;
+    }
+    .productCard {
+      box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+      margin: 0px 5px 3rem 5px;
+      cursor: pointer;
+      position: relative;
+      &:hover {
+        box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+      }
+      .top {
+        height: 300px;
+        position: relative;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: 50% 50%;
+        }
+        .tag {
+          position: absolute;
+          left: 0;
+          top: 10px;
+          padding: 4px 8px;
+          background-color: $primary_color;
+          color: $white_txt;
+          letter-spacing: 3px;
+          font-weight: 500;
+          font-size: 1rem;
+        }
+      }
+      .bottom {
+        padding: 1rem;
+        position: relative;
+        h3 {
+        padding-left: 0;
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+        }
+        .price {
+          font-size: 1.1rem;
+          letter-spacing: 1px;
+        }
+      }
+    }
+  }
+  .product_intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    @include x-small {
+      padding: 0 1.5rem;
+    }  
+    .h4 {
+      font-size: 1.6rem;
+      position: relative;
+      text-align: center;
+      &::before, &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        width: 30%;
+        height: 2px;
+        background-color: rgb(214, 209, 209);
+      }
+      &::before {
+        left: -30%;
+      }
+      &::after {
+        left: 100%;
+        @include x-small {
+          right: 5%;
+        }
+      }
+    }
+    p {
+      font-size: 1rem;
+      line-height: 1.5rem;
+      margin-bottom: 4.5rem;
+      width: 65%;
+      @include small {
+        width: 80%;
+      }
+      @include x-small {  
+        margin-bottom: 3rem;
+        width: 90%;
+      }
+    }
+    .notice {
+      padding: 1.5rem 10rem;
+      padding-top: 0;
+      @include small {
+        padding: 1.5rem 3rem;
+        padding-top: 0;
+       }
+      div {
+        .notice_txt {
+          padding: 0 0rem;
+          margin: 0 auto;
+          margin-bottom: 2rem;
+          color: $secondary_color;
+          @include x-small {  
+            padding: 0 0
+          }          
+        }
+        .notice_title {
+          padding-top: 1rem;
+          padding-bottom: 1rem;
+          text-align: center;
+          font-size: 1.1rem;
+          color: $secondary_color;
+          i {
+            margin:0 4px;
+          }
+        }
+      }
+    }
+  }
+}
+

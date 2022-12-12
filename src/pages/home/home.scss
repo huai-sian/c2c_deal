@@ -1,0 +1,683 @@
+@import "./../../assets/_utilities.scss";
+@import "./../../assets/_mixin.scss";
+
+header {
+  font-family: 'Noto Sans TC', sans-serif;
+  position: relative;
+  color: red;
+  .carousel {
+    position: relative;
+    margin-top: 56px;
+    img {
+      width: 100%;
+      height: 90vh;
+      object-fit: cover;
+      object-position: 50% 50%;
+    }
+    .slide-box {
+      position: absolute;
+      width: calc(100% - 5%);
+      height: calc(100% - 5%);
+      top: 2.5%;
+      left: 2.5%;
+      background-color: $white_txt;
+      opacity: 0.2;
+      border: 5px double black;
+    }
+    h2 {
+      position: absolute;
+      top: 20%;
+      left: 20%;
+      font-size: 4.5rem;
+      font-weight: 700;
+      color: $white_txt;
+      letter-spacing: 4px;
+      text-shadow: 1px 1px 2px #626567;
+      @include medium {
+        position: absolute;
+        top: 20%;
+        left: 10%;
+        font-size: 2.7rem;
+        font-weight: 500;
+      }
+      @include x-small {
+        position: absolute;
+        top: 20%;
+        left: 10%;
+        font-size: 2.4rem;
+        font-weight: 500;
+      }
+    }
+    h3 {
+      position: absolute;
+      top: 40%;
+      left: 20%;
+      font-size: 2rem;
+      font-weight: 400;
+      color: $white_txt;
+      letter-spacing: 4px;
+      padding-right: 1rem;
+      @include medium {
+        position: absolute;
+        top: 40%;
+        left: 10%;
+        font-size: 1.5rem;
+        font-weight: 400;
+      }
+      @include x-small {
+        position: absolute;
+        top: 40%;
+        left: 10%;
+        font-size: 1.3rem;
+        font-weight: 400;
+        letter-spacing: 2px;
+        line-height: 1.5rem;
+      }
+    } 
+    p {
+      position: absolute;
+      top: 50%;
+      left: 20%;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: $white_txt;
+      letter-spacing: 6px;
+      padding-right: 1rem;
+      @include medium {
+        left: 10%;
+        font-size: 1.3rem;
+        letter-spacing: 2px;
+      }
+      @include x-small {
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+        line-height: 1.5rem;
+      }
+    }
+    .carousel-btn {
+      position: absolute;
+      left: 50%;
+      bottom: 20%;
+      border: none;
+      outline: none;
+      border-radius: $radius;
+      width: 9rem;
+      height: 2.3rem;
+      line-height: 2.3rem;
+      font-size: 1.2rem;
+      background-color: $primary_color;
+      color: $white_txt;
+      transform: translateX(-50%);
+      &:hover {
+        background-color: $secondary_color;
+      }
+      @include medium {
+        @include unhover;
+      }
+    }
+  }
+  .scrolldown>a {
+    cursor: pointer;
+    i {
+      position: absolute;
+      top: 82vh;
+      left: calc(50vw - 15px);
+      color: $white_txt;
+      font-size: 2.3rem;
+      // transform: translateX(calc(-50vw - 2.3rem));
+      -webkit-animation: sdb05 1.5s infinite;
+      animation: sdb05 1.5s infinite;
+      box-sizing: border-box;
+      z-index: 3;
+    }
+  }
+}
+@-webkit-keyframes sdb05 {
+  0% {
+    -webkit-transform: rotate(-45deg) translate(0, 0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: rotate(-45deg) translate(-20px, 20px);
+    opacity: 0;
+  }
+}
+@keyframes sdb05 {
+  0% {
+    transform: rotate(0) translate(0, 0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(0) translate(0, 20px);
+    opacity: 0;
+  }
+}
+.allseries {
+  .seriestop {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 0;
+  background-color: #E5E7E9;
+  padding-top: 5rem;
+  h3 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 600;
+    position: relative;
+    span {
+      position: absolute;
+      color: #5D6D7E;
+      opacity: 0.4;
+      font-size: 2rem;
+      font-weight: 600;
+      top: 80%;
+      left: 2rem;
+      width: 100%;
+    }
+  }
+  .series-group {
+    padding: 4.5rem 25%;
+    @media screen and (max-width: 1500px) {
+      padding: 3rem 15%;
+    }
+    @include small {
+      padding: 3rem 3rem;
+    }
+    .seriesItem {
+      border: 3px solid $white_txt;
+      overflow: hidden;
+      position: relative;
+      padding-bottom: 65%;//利用內距顯示圖片
+      background-position: center center;
+      background-size: cover;
+      cursor: pointer;
+      img {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+      }
+      p {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-size: 2rem;
+        font-weight: 500;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: $white_txt;
+        opacity: 0;
+        transition: all 0.4s;
+        background-color: rgba(0,0,0,0.4);
+        &:hover {
+          opacity: 1;
+        }
+        @include medium {
+          opacity: 1;
+        }
+      }
+    }  
+  }
+  }
+}
+
+.features {
+  margin-top: 3rem;
+  .features_img { 
+    height: 300px;
+    background-image: url('https://i.imgur.com/9ZpqiqP.jpg');
+    background-position: center center;
+    opacity: 0.6;
+    @include x-small {
+      width:300px;
+      opacity: 0.3;
+    }
+  }
+  .feature_txt {
+    position: relative;
+    .feature_slogan {
+      position: absolute;
+      left: 4rem;
+      top: 70px;
+      @include medium {
+        position: absolute;
+        left: 2rem;
+        top: 70px;
+      }
+      @include small {
+        position: absolute;
+        left: 1rem;
+        top: 70px;
+      }
+      @include x-small {
+        position: absolute;
+        left: -6rem;
+        top: 70px;
+      }
+      h4 {
+        font-size: 1.7rem;
+        position: relative;
+        @include medium {
+          font-size: 1.4rem;
+          position: relative;
+        }
+        @include small {
+          font-size: 1.3rem;
+          position: relative;
+        }
+        @include x-small {
+          font-size: 1.2rem;
+          position: relative;
+        }
+        &::after {
+          position: absolute;
+          content: '';
+          left: 2rem;
+          top: 95%;
+          width: 100%;
+          height: 10px;
+          background-color: rgba($color: $primary_color, $alpha: 0.4);
+          @include small {
+            left: 2rem;
+            top: 95%;
+            width: 85%;
+            height: 10px;
+            background-color: rgba($color: $primary_color, $alpha: 0.4);
+          }
+          @include x-small {
+            left: 1rem;
+            width: 100%;
+          }
+        }
+        &:nth-of-type(1) {
+          @include x-small {
+            margin-left: 6rem;
+          }
+        }
+        &:nth-of-type(2) {
+          margin-left: 1.5rem;
+          @include x-small {
+            margin-left: 4rem;
+          }
+        }
+        &:nth-of-type(3) {
+          margin-left: 3rem;
+          @include x-small {
+            margin-left: 2rem;
+          }
+        }
+      }
+    }
+  }
+}
+.hotSales {
+  .containerfixed {
+  width: 75%;
+  margin: 0 auto;
+  padding-top: 4rem;
+  padding-bottom: 1.5rem;
+  @include x-small {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .hotSalesTop>h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 600;
+    position: relative;
+    margin-bottom: 1.5rem;
+    span {
+      position: absolute;
+      color: #5D6D7E;
+      opacity: 0.4;
+      font-size: 2rem;
+      font-weight: 600;
+      top: 80%;
+      left: 1rem;
+      width: 120%;
+      text-align: left;
+    }
+  }
+  .sec {
+    flex-direction: row;
+    padding: 1.5rem 0;
+    margin-bottom: 3rem;
+    @include x-small {
+      flex-direction: column;
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+    .secImg {
+      height: inherit;
+      overflow: hidden;
+      width: 50%;
+      @include x-small {
+        width: 100%;
+      }
+      img {
+        transform: scale(1);
+        transition: all 0.5s;
+        max-width: 100%;
+        object-position: center center;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        &:hover {
+          transform: scale(1.1);
+        }
+        @include medium {
+          &:hover {
+            transform: scale(1);
+          }
+        }
+      }
+    }
+    .secContent {
+      padding: 3rem;
+      width: 50%;
+      position: relative;
+      background-color: #F2F3F4;
+      @include medium {
+        padding: 1.5rem;
+      }
+      @include small {
+        padding: 1.5rem;
+      }
+      @include x-small {
+        padding: 2rem;
+        width: 100%;
+      }
+      &::before {
+        position: absolute;
+        content: " ";
+        top: 50%;
+        left: -10px;
+        width: 20px;
+        height: 20px;
+        background-color: #F2F3F4;
+        z-index: 2;
+        transform: rotate(45deg);
+        @include x-small {
+          position: absolute;
+          content: " ";
+          top: -10px;
+          left: calc(50% - 10px);
+          width: 20px;
+          height: 20px;
+          background-color: #F2F3F4;
+          z-index: 2;
+          transform: rotate(45deg);
+        }
+      }
+      h3 {
+        font-size: 2.2rem;
+        @include medium {
+          font-size: 2rem;
+        }
+        @include small {
+          font-size: 1.8rem;
+        }
+        @include x-small {
+          font-size: 2rem;
+        }
+      }
+      p {
+        font-size: 1.2rem;
+        margin-top: 1.5rem;
+        @include small {
+          font-size: 1rem;
+          margin-top: 1.5rem;
+        }
+        @include x-small {
+          font-size: 1rem;
+          margin-top: 1.5rem;
+        }
+      }
+      button {
+        margin-top: 2rem;
+        border: none;
+        border-radius: $radius;
+        outline: none;
+        width: 11rem;
+        height: 3rem;
+        background-color: $primary_color;
+        color: $white_txt;
+        font-size: 1.2rem;
+        &:hover {
+          background-color: $secondary_color;
+        }
+        @include medium {
+          @include unhover;
+        }
+      }
+    }
+  }
+  }
+}
+.consults {
+  padding: 3rem;
+  @include small {
+    padding-top: 1rem;
+  }
+  .container {
+    max-width: 1028px;
+    .left {
+      position: relative;
+      @include small {
+        margin-bottom: 2rem;
+      }
+      .backimg {
+        height: 90%;
+        width: 90%;
+        position: absolute;
+        left: 10%;
+        bottom: -15px;
+        background-image: url('https://i.imgur.com/9ZpqiqP.jpg');
+        transform: rotate(-20deg);
+        background-size: cover;
+        background-position: center center;
+        z-index: -1;
+        opacity: 0.2;
+        @include small {
+          height: 80%;
+          width: 80%;
+          position: absolute;
+          left: 5%;
+          bottom: -15px;
+          background-image: url('https://i.imgur.com/9ZpqiqP.jpg');
+          transform: rotate(5deg);
+          background-size: cover;
+          background-position: center bottom;
+          z-index: -1;
+          opacity: 0.2;
+        }
+        @include x-small {
+          transform: rotate(5deg) scale(1.15);
+        }
+      } 
+      h3 {
+        font-size: 2rem;
+        position: relative;
+        span {
+          font-size: 1.4rem;
+          position: absolute;
+          left: 1rem;
+          top: 80%;
+          color: #5D6D7E;
+          opacity: 0.4;
+          font-weight: 500;
+        }
+      }
+      p {
+        padding: 5px;
+        margin-top: 2rem;
+        font-size: 1rem;
+        line-height: 1.5rem;
+      }
+    }
+    .right {
+      .contact {
+        padding: 1rem;
+        margin: 1rem;
+        max-width: 460px;
+        .bordercorner {
+          width: 4rem;
+          height: 4rem;
+          display: block;
+          position: absolute;
+          transition: all 0.5s;
+          opacity: 1;
+          &:nth-of-type(1) {
+            left: 0;
+            top: 0;
+            border-top: 1px solid grey;
+            border-left: 1px solid grey;
+          }
+          &:nth-of-type(2) {
+            right: 0;
+            top: 0;
+            border-top: 1px solid grey;
+            border-right: 1px solid grey;
+          }
+          &:nth-of-type(3) {
+            left: 0;
+            bottom: 0;
+            border-bottom: 1px solid grey;
+            border-left: 1px solid grey;
+          }
+          &:nth-of-type(4) {
+            right: 0;
+            bottom: 0;
+            border-bottom: 1px solid grey;
+            border-right: 1px solid grey;
+          }
+        }
+        input {
+          width: 100%;
+          border: none;
+          outline: none;
+          border-bottom: 1px solid $secondary_color;
+          margin-bottom: 5px;
+          &:focus {
+            border-bottom: 1px solid $primary_color;
+          }
+        }
+        textarea {
+          width: 100%;
+          border: none;
+          outline: none;
+          border-bottom: 1px solid $secondary_color;
+          margin-bottom: 5px;
+          height: 100px;
+        }
+        button {
+          width: 100%;
+          background-color: $secondary_color;
+          border: none;
+          border-radius: $radius;
+          color: $white_txt;
+          transition: all 0.5s;
+          &:hover {
+            background-color: $primary_color;
+          }
+          @include medium {
+            &:hover {
+              background-color: $secondary_color;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+#sendOverModal .modal-header {
+  background-color: $secondary_color;
+}
+#couponModal {
+  .modal-header {
+    background-color: $secondary_color;
+  }
+  .modal-body {
+    form {
+    margin-top: 1.5rem;
+    }
+    .coupon {
+      margin-top: 1.5rem;
+      position: relative;
+      h3 {
+        position: absolute;
+        transform: translateY(-50%);
+        left: 1.5rem;
+        top: 45%;
+        font-size: 1.5rem;
+        strong {
+          font-weight: 600;
+        }
+      }
+      .backimg {
+        background-image: url('https://i.imgur.com/9ZpqiqP.jpg');
+        background-position: center center;
+        background-size: cover;
+        padding: 90px 120px;
+        position: relative;
+        &::after {
+          content: "";
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translateX(-50%) translateY(-50%);
+          opacity: 0.4;
+          width: 95%;
+          height: 90%;
+          background: $white_txt;
+        }
+      }
+    }
+  }
+}
+ //沒有定義div(backimg的大小，而是運用內距來規範大小，以顯示背景圖片)
+.fadeIn {
+  animation: fadeInto 2s;
+}
+@keyframes fadeInto {
+  0% {
+    transform: translateX(60px);
+    opacity: 0;
+  }
+  100% { 
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+.form-signin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  .btn-signin {
+    background-color: $primary_color;
+    color: $white_txt;
+    &:hover {
+      background-color: $secondary_color;
+    }
+    @include medium {
+      @include unhover;
+    }
+  }
+}
+
+
+
+
+  
+  
+  

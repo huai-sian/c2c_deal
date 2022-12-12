@@ -1,0 +1,31 @@
+$primary_color: #34495E;
+$secondary_color: #85929E;
+
+.pages {
+  margin-bottom: 1rem;
+  padding-inline-start: 0px;
+  .page {
+    display: inline-block;
+    padding: 4px 1rem;
+    &.active {
+      .pageNum {
+        border-bottom: 1px solid $primary_color;
+        font-weight: 500;
+      }
+    }
+    &.disabled {
+      .pageNum {
+        color: rgba($color: $secondary_color, $alpha: 0.7);
+        cursor: default;
+        pointer-events: none;//＊點擊並不會觸發事件
+      }
+    }
+  }
+  .pageNum {
+    color: $primary_color;
+    font-size: 1rem;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

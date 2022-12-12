@@ -1,0 +1,156 @@
+$primary_color: #34495E;
+$secondary_color: #85929E;
+$white_txt: white;
+$radius: 6px;
+
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+}
+.navbar {
+  background-color: $white_txt;
+  .nav-title {
+    color: $secondary_color ;
+    background: $white_txt;
+    font-family: 'EB Garamond', serif;
+    letter-spacing: 3px;
+    font-size: 1.5rem;
+    border: $white_txt;
+    margin: 0;
+    &:hover {
+      color: $primary_color;
+      text-decoration: none;
+    }
+  }
+  .dropdown {
+    position: relative;
+  }
+  .dropdown-menu {
+    position: absolute;
+    right: .5rem;
+    top: 2rem;
+    height: fit-content;
+    display: block;
+  }
+}
+.navContent .dropdown .disabled {
+  cursor: default;
+  pointer-events: none;
+}
+.navContent button {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  border: none;
+  background: transparent;
+  color: #85929E ;
+	font-size: 1.3rem;
+  letter-spacing: 2px;
+  position: relative;
+  &:hover {
+    color: $primary_color;
+  }
+}
+.navContent {
+  .btn-store {
+    span {
+      color: $secondary_color;
+      &:hover {
+        color: $primary_color;
+      }
+    }
+    i {
+      color: $secondary_color;
+      &:hover {
+        color: $primary_color;
+      }
+    }
+  }
+  h4 {
+    text-align: center;
+  }
+  .table-cart {
+    td {
+      vertical-align: middle;
+      img {
+        transform: translate(0,7px);
+      }
+      .fa-shopping-cart {
+        cursor: pointer;
+        color: $secondary_color;
+        &:hover {
+          color: $primary_color;
+        }
+        &:active {
+          color: $primary_color;
+        }
+      }
+      &.wish_title {
+        cursor: pointer;
+        color: $primary_color;
+        font-size:0.9rem;
+        &:hover {
+          color: $secondary_color;
+        }
+      }
+    }
+  }
+  .btn-heart {
+    .badge {
+      border-radius: 50%;
+      background-color: #CB4335;
+      color: $white_txt;
+      font-size: 0.7rem;
+      position: absolute;
+      top: -5.5px;
+      right: -5.5px;
+    }
+  }
+  .btn-cart {
+    .badge {
+      border-radius: 50%;
+      background-color: #CB4335;
+      color: $white_txt;
+      font-size: 0.7rem;
+      position: absolute;
+      top: -5.5px;
+      right: -5.5px;
+    }
+  }
+  .close {
+    font-size: 100%;
+    line-height: 100%;
+    cursor: pointer;
+    color: $secondary_color;
+    &:hover {
+      color: $primary_color;
+    }
+  }
+  .totalinfo {
+    border-top: 1px solid #d4d9dd ;
+    padding-top: 0.5rem;
+    .btn-goCart {
+      width: 100%;
+      background-color: $primary_color;
+      color: $white_txt;
+      margin-top: 1.5rem;
+      border-radius: $radius;
+      a {
+        color: $white_txt;
+        text-decoration: none;
+      }
+      &:hover {
+        background-color: $secondary_color;
+      }
+    }
+    .totalnum {
+      padding-left: 4.5rem;
+    }
+  }
+  p {
+    text-align: center;
+  }
+}
+.dropdown-menu-width {
+  width: 320px;
+}

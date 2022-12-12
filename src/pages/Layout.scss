@@ -1,0 +1,32 @@
+.layout{
+  min-width:320px;
+  margin:0;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  overflow-x: hidden;
+  margin-top: 56px;
+}
+.layout .content{
+  min-height: 100%;
+}
+.input{
+  outline:0;
+}
+.fade-enter{
+  opacity: 0;
+}
+.fade-enter-to{
+  opacity: 1;
+}
+.fade-enter-active{
+  transition:opacity 0.4s;
+}
+.fade-leave{
+  opacity: 1;
+}
+.fade-leave-to{
+  opacity: 0;
+}
+.fade-leave-active{
+  transition:opacity 0.4s;
+}

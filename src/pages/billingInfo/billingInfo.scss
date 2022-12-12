@@ -1,0 +1,105 @@
+@import "./../../assets/_utilities.scss";
+@import "./../../assets/_mixin.scss";
+
+.billinginfo {
+  font-family: 'Noto Sans TC', sans-serif;
+  .container_fix{
+    width:90%;
+    margin:0 auto;
+    max-width: 1200px;
+  }
+  h3 {
+    margin-top: 1.5rem;
+    font-size: 1.4rem;
+  }
+  .order {
+    border: 1px solid $primary_color;
+    border-radius: $radius;
+    padding: 1.5rem;
+    padding-top: 0.5rem;
+    margin-top: 1rem;
+    list-style: none;
+    .orderList {
+      border-bottom: 1px solid rgb(185, 184, 184);
+      .pro-img {
+        width: 5rem;
+        height: 4rem;
+        margin-top: 1.5rem;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .pro-name, .pro_qty, .pro_price, .pro_del {
+        margin-top: 1.5rem;
+      }
+      .pro-name, .pro_price, .pro_qty {
+        padding-top: 1rem;
+      }
+      @include small {
+        .pro-name {
+          margin-top: 1rem;
+          padding-top: 1rem;
+        }
+      }
+    }
+    .summary {
+      div {
+        text-align: right;
+      }
+    }
+  }
+  .buyer_infos {
+    border: 1px solid $primary_color;
+    border-radius: $radius;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    label {
+      margin-bottom: 0.5rem;
+      .marker {
+        margin-left: 4px;
+        color: rgb(189, 161, 161);
+      }
+    }
+    .sub_order {
+      text-align: right;
+      margin: 1.5rem;
+      margin-bottom: 0;
+      margin-right: 0;
+      .btn-order {
+        background-color: $primary_color;
+        color: $white_txt;
+        border: none;
+        outline: none;
+        padding: 7px 15px;
+        border-radius: $radius;
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+        animation: btn_animation  1s infinite;
+        cursor: pointer;
+        &:hover {
+          background-color: $secondary_color;
+        }
+        &.disabled {
+          pointer-events: none;
+          background-color: $secondary_color;
+          cursor: none;
+        }
+        @include medium {
+          @include unhover;
+        }
+      }
+    }
+  }
+  .coupon-send {
+    background-color: $primary_color;
+    color: $white_txt;
+    &:hover {
+      cursor: pointer;
+      background-color: $secondary_color;
+    }
+    @include medium {
+      @include unhover;
+    }
+  }
+}

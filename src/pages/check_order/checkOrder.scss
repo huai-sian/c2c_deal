@@ -1,0 +1,201 @@
+@import "./../../assets/_utilities.scss";
+@import "./../../assets/_mixin.scss";
+
+.orders_check {
+  padding-left: 15px;
+  padding-right: 15px;
+  h3 {
+    margin-top: 1.5rem;
+    font-size: 1.4rem;
+  }
+  .order {
+    list-style: none;
+    border: 1px solid $primary_color;
+    border-radius: $radius;
+    padding: 1.5rem;
+    padding-top: 0.5rem;
+    margin-top: 1rem;
+    .orderList {
+      border-bottom: 1px solid rgb(185, 184, 184);
+      .pro-img {
+        width: 5rem;
+        height: 4rem;
+        margin-top: 2.5rem;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .numControl {
+        margin-top: 3.5rem;
+        .btn-minus {
+          border: 1px solid $primary_color;
+          color: $primary_color;
+          padding: 6px 8px;
+          padding-top: 7px;
+          border-radius: 4px 0 0 4px;
+          outline: none;
+          background: transparent;
+          &:hover {
+            color: $secondary_color;
+            border: 1px solid $primary_color;
+          }
+          &:focus {
+            color: $secondary_color;
+            border: 1px solid $primary_color;
+            outline: none;
+          }
+        }
+        .btn-plus {
+          border: 1px solid $primary_color;
+          padding: 6px 8px;
+          padding-top: 7px;
+          border-radius: 0 4px 4px 0;
+          color: $primary_color;
+          outline: none;
+          background: transparent;
+          &:hover {
+            color: $secondary_color;
+            border: 1px solid $primary_color;
+          }
+          &:focus {
+            color: $secondary_color;
+            border: 1px solid $primary_color;
+            outline: none;
+          }
+        }
+        .amount {
+          border: 1px solid $primary_color;
+          padding: 4px 8px;
+          margin: 0;
+          outline: none;
+          text-align: center;
+          border-radius: none;
+          width: 4.5rem;
+          &:focus {
+            border: 1px solid $secondary_color;
+          }
+        }
+      }
+      .pro-name, .pro_price, .pro_del {
+        margin-top: 2.5rem;
+      }
+      .pro-name, .pro_price, .pro_del {
+        padding-top: 1rem;
+      }
+      @include small {
+        .pro-name {
+          margin-top: 1rem;
+          padding-top: 1rem;
+        }
+        .numControl {
+          margin-top: 0rem;
+          padding-top: 0.5rem;
+        }
+      }
+    }
+    .summary {
+      div {
+        text-align: right;
+      }
+    }
+  }
+  .gocheck {
+    text-align: right;
+    margin: 1.5rem;
+    margin-right: 0;
+    .btn-check {
+      background-color: $primary_color;
+      position: relative;
+      color: $white_txt;
+      border: none;
+      outline: none;
+      padding: 10px 18px;
+      border-radius: $radius;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      animation: btn_animation  1s infinite;
+      pointer-events: initial;
+      &.disabled {
+        pointer-events: none;
+        background-color: $secondary_color;
+        cursor: none;
+      }
+      &:hover {
+        background-color: $secondary_color;
+      }
+    }
+    .btn_confirmcart {
+      
+    }
+    .btn-back {
+      background-color: #bac3cc;
+      color: $white_txt;
+      border: none;
+      outline: none;
+      padding: 7px 15px;
+      border-radius: $radius;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      margin-right: 12px;
+      &:hover {
+        background-color: $secondary_color;
+      }
+      &:active {
+        background-color: #798692;
+      }
+    }
+  }
+  .declare {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 3rem;
+    border-top: 1px solid #bcc3ca;
+    position: relative;
+    .declare_left {
+      position: absolute;
+      left: 0;
+      top: -1.2rem;
+      font-size: 2.2rem;
+      background-color: $white_txt;
+      color: rgba($color: $primary_color, $alpha: 0.4);
+    }
+    h5 {
+      margin-bottom: 8px;
+      font-size: 1.4rem;
+      i {
+        margin-right: 8px;
+        color: $primary_color;
+      }
+    }
+    ul {
+      padding-left: 1rem;
+      list-style-type: disc;
+      li {
+        font-size: 1rem;
+        line-height: 1.5rem;
+      }
+    }
+  }
+}
+.btn-stay {
+  background-color: $primary_color;
+  color: $white_txt;
+  &:hover {
+    background-color: $secondary_color;
+  }
+  @include medium {
+    @include unhover;
+  }
+}
+.btn-leave {
+  background-color: $secondary_color;
+  color: $white_txt;
+  &:hover {
+    background-color: $secondary_color;
+  }
+}
+
+
