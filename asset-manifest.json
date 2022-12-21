@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/c2c_deal/static/css/main.0cba240d.css",
-    "main.js": "/c2c_deal/static/js/main.c287bf47.js",
+    "main.css": "/c2c_deal/static/css/main.5151e11e.css",
+    "main.js": "/c2c_deal/static/js/main.1ad0fdfb.js",
     "static/js/787.fce3dd5d.chunk.js": "/c2c_deal/static/js/787.fce3dd5d.chunk.js",
     "static/media/matthew-tkocz-q697-Akhwkc-unsplash (2)-min.jpg": "/c2c_deal/static/media/matthew-tkocz-q697-Akhwkc-unsplash (2)-min.14109a43920d9ff4c6f5.jpg",
     "static/media/sincerely-media-zLi4P7nnlsA-unsplash.jpg": "/c2c_deal/static/media/sincerely-media-zLi4P7nnlsA-unsplash.b00528e6c8c56a9dbf40.jpg",
@@ -19,12 +19,12 @@
     "static/media/jcb.svg": "/c2c_deal/static/media/jcb.b2ed95d7d0992b72a8ed58a349f61bda.svg",
     "static/media/mastercard.svg": "/c2c_deal/static/media/mastercard.368a7a10da66275b8dc9928e39b3522d.svg",
     "index.html": "/c2c_deal/index.html",
-    "main.0cba240d.css.map": "/c2c_deal/static/css/main.0cba240d.css.map",
-    "main.c287bf47.js.map": "/c2c_deal/static/js/main.c287bf47.js.map",
+    "main.5151e11e.css.map": "/c2c_deal/static/css/main.5151e11e.css.map",
+    "main.1ad0fdfb.js.map": "/c2c_deal/static/js/main.1ad0fdfb.js.map",
     "787.fce3dd5d.chunk.js.map": "/c2c_deal/static/js/787.fce3dd5d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0cba240d.css",
-    "static/js/main.c287bf47.js"
+    "static/css/main.5151e11e.css",
+    "static/js/main.1ad0fdfb.js"
   ]
 }
