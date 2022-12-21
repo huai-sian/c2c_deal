@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { updateMessage, removeMessage } from './alertMessageSlice';
 import axios from 'axios';
+const Swal = require('sweetalert2');
 
 const url = 'https://vue-course-api.hexschool.io/api/exploreu/cart';
 const url2 = 'https://vue-course-api.hexschool.io/api/exploreu/coupon';
@@ -14,17 +16,18 @@ const initialState = {
   addToCart: false,
   couponSuccess: false,
   orderId: '',
+  isDeleted: false,
+  orderCreated: false,
+  cartConfirmed: false,
 };
 
 export const getCart = createAsyncThunk('cart/getCart',
   async (page, thunkAPI) => {
     try {
       const res = await axios.get(url);
-      
       if(res.data.success) {
         return res.data.data;
       }
-      
     } catch(err) {
       return thunkAPI.rejectWithValue('something went wrong');
     }
@@ -32,15 +35,22 @@ export const getCart = createAsyncThunk('cart/getCart',
 )
 
 export const confirmCart = createAsyncThunk('cart/confirmCart',
-  async (cart, thunkAPI) => {
+  async ({product, qty}, thunkAPI) => {
     try {
       const cartinfo = {
-        product_id: cart.id,
-        qty: cart.qty
+        product_id: product.id,
+        qty: qty
       }
       const res = await axios.post(url, {data: cartinfo});
-      if(res.data.success) {
-        return 'success'
+      const resCart = await axios.get(url);
+      Swal.fire(
+        '',
+        `${res.data.message}`,
+        'info',
+      );
+      // thunkAPI.dispatch(updateMessage({ message: res.data.message, status: 'danger'}));
+      if(resCart.data.success) {
+        return resCart.data.data;
       } else {
         return 'failed'
       }
@@ -55,6 +65,7 @@ export const createOrder = createAsyncThunk('cart/createOrder',
     try {
       const res = await axios.post(url3, {data: order});
 
+      // thunkAPI.dispatch(updateMessage({ message: res.data.message, status: 'danger'}));
       if(res.data.success) {
         return res.data.orderId;
       }
@@ -68,9 +79,16 @@ export const createOrder = createAsyncThunk('cart/createOrder',
 export const deleteCart = createAsyncThunk('cart/deleteCart',
   async (item, thunkAPI) => {
     try {
-      const res = await axios.delete(`${url}/${item.id}`);
-      if(res.data.success) {
-        return 'success'
+      const res = await axios.delete(`${url}/${item['product_id']}`);
+      const resCart = await axios.get(url);
+      Swal.fire(
+        '',
+        `${res.data.message}`,
+        'info',
+      );
+      // thunkAPI.dispatch(updateMessage({ message: res.data.message, status: 'danger'}));
+      if(resCart.data.success) {
+        return resCart.data.data;
       } else {
         return 'failed'
       }
@@ -85,6 +103,13 @@ export const addCouponCode = createAsyncThunk('cart/addCouponCode',
     const coupon = { code: couponNum };
     try {
       const res = await axios.post(url2, { data: coupon });
+      console.log(res.data.message);
+      Swal.fire(
+        '',
+        `${res.data.message}`,
+        'info',
+      );
+      // thunkAPI.dispatch(updateMessage({ message: res.data.message, status: 'danger'}));
       if(res.data.success) {
         return true;
       } else {
@@ -183,7 +208,19 @@ const cartSlice = createSlice({
     },
     getCartLocal: (state) => {
       state.cart = JSON.parse(localStorage.getItem('cart')) || []
-    }
+    },
+    updateCartConfirmed: (state, action) => {
+      state.cartConfirmed = action.payload;
+    },
+    updateIsDeleted: (state, action) => {
+      state.isDeleted = action.payload;
+    },
+    updateOrderCreated: (state, action) => {
+      state.orderCreated = action.payload;
+    },
+    updateCouponSuccess: (state, action) => {
+      state.couponSuccess = action.payload;
+    },
   },
   extraReducers: {
     [getCart.pending]: (state) => {
@@ -193,6 +230,8 @@ const cartSlice = createSlice({
       state.isLoading = false;
       state.cartApi = action.payload;
       state.cartlength = action.payload.carts.length;
+      state.total = action.payload['final_total'];
+      console.log(state.cartlength, state.total, state.cartApi);
     },
     [getCart.rejected]: (state, action) => {
       state.isLoading = false;
@@ -203,9 +242,15 @@ const cartSlice = createSlice({
     [confirmCart.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.addToCart = true;
+      state.cartConfirmed = true;
+      state.cartApi = action.payload;
+      state.cartlength = action.payload.carts.length;
+      state.total = action.payload['final_total'];
+      console.log(state.cartlength, state.total);
     },
     [confirmCart.rejected]: (state, action) => {
       state.isLoading = false;
+      state.cartConfirmed = false;
     },
     [createOrder.pending]: (state) => {
       state.isLoading = true;
@@ -218,18 +263,26 @@ const cartSlice = createSlice({
       state.cart = JSON.parse(localStorage.getItem('cart')) || [];
       state.cartlength = 0;
       state.total = 0;
+      state.orderCreated = true;
     },
     [createOrder.rejected]: (state, action) => {
       state.isLoading = false;
+      state.orderCreated = false;
     },
     [deleteCart.pending]: (state) => {
       state.isLoading = true;
     },
     [deleteCart.fulfilled]: (state, action) => {
       state.isLoading = false;
+      state.isDeleted = true;
+      state.cartApi = action.payload;
+      state.cartlength = action.payload.carts.length;
+      state.total = action.payload['final_total'];
+      state.cartConfirmed = false;
     },
     [deleteCart.rejected]: (state, action) => {
       state.isLoading = false;
+      state.isDeleted = false;
     },
     [addCouponCode.pending]: (state) => {
       state.isLoading = true;
@@ -240,11 +293,26 @@ const cartSlice = createSlice({
     },
     [addCouponCode.rejected]: (state, action) => {
       state.isLoading = false;
+      state.couponSuccess = false;
     },
   }
 })
 
-export const { addTocart, changeCartnum, getCartLength, getCartTotal, pushToCart, removeCart, updateCart, getCartLocal } = cartSlice.actions;
+export const 
+  { 
+    addTocart,
+    changeCartnum,
+    getCartLength,
+    getCartTotal,
+    pushToCart,
+    removeCart,
+    updateCart,
+    getCartLocal,
+    updateCartConfirmed,
+    updateOrderCreated,
+    updateIsDeleted,
+    updateCouponSuccess
+  } = cartSlice.actions;
 
 export default cartSlice.reducer;
 

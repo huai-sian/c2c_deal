@@ -9,6 +9,7 @@ import BillingInfo from './billingInfo/billingInfo';
 import Checkout from './checkout/checkout';
 import Footer from './../components/footer';
 import Totop from './../components/toTop';
+import AlertMessage from './../components/alertMessage';
 
 
 import {
@@ -32,12 +33,12 @@ export default function Layout() {
         <Route exact path={`${path}`}>
           <Home />
         </Route>
+        <Route path={`/productlist/:series`}>
+          <ProductList />
+        </Route>
         <Route path={`/productlist`}>
           <ProductList />
         </Route>
-        {/* <Route path={`/productlist/:series`}>
-          <ProductList />
-        </Route> */}
         <Route path={`/product_detail/:id`}>
           <ProductDetail />
         </Route>
@@ -51,6 +52,7 @@ export default function Layout() {
           <Checkout />
         </Route>
       </Switch>
+      <AlertMessage />
       <Totop />
       <Footer />
     </div>

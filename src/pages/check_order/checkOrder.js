@@ -1,7 +1,23 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts, renderSeriesList, updateWish, getWishLength, getWishFromLocal } from './../../slices/productsSlice';
-import { addTocart, getCartLength, getCartTotal, pushToCart, removeCart, updateCart, getCartLocal, confirmCart } from './../../slices/cartSlice';
+import { 
+  getProducts,
+  renderSeriesList,
+  updateWish,
+  getWishLength,
+  getWishFromLocal
+ } from './../../slices/productsSlice';
+import { 
+  addTocart,
+  getCartLength,
+  getCartTotal,
+  pushToCart,
+  removeCart,
+  updateCart,
+  getCartLocal,
+  confirmCart,
+  getCart,
+  updateCartConfirmed } from './../../slices/cartSlice';
 import Img from '../../assets/images/vera-cho-10SLUJj6G6w-unsplash.jpg';
 
 import CheckItem from './../../components/checkItem.js';
@@ -22,35 +38,31 @@ import './checkOrder.scss';
 export default function CheckOrder() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { cart, cartlength, total } = useSelector((store) => store.cart)
+  const { cartApi, cartlength, total, cartConfirmed } = useSelector((store) => store.cart)
   const [quantity, setQuantity] = useState(1);
   
   useEffect(() => {
-    dispatch(getCartLocal());
-    dispatch(getCartLength());
-    dispatch(getCartTotal());
-    setQuantity()
+    dispatch(getCart());
+    setQuantity();
+    if(cartlength == 0) {
+      history.push('/productlist');
+    }
   }, []);
 
-  const getCartInfo = () => {
-    dispatch(getCartLocal());
-    dispatch(getCartLength());
-    dispatch(getCartTotal());
-  }
+  useEffect(() => {
+    if(cartlength == 0) {
+      history.push('/productlist');
+    }
+  }, [cartlength]);
 
-  const changeAmount = (prod, qty) => {
-    console.log(prod, qty);
-    // getCartInfo();
-    // dispatch(addTocart({ product: prod, qty}));
-    // getCartInfo();
+
+  const getCartInfo = () => {
+    dispatch(getCart());
   }
 
   const handleConfirmCart = () => {
     console.log('check');
-    cart.forEach((item, i) => {
-      dispatch(confirmCart(item));
-    })
-    history.push(`/billingInfo`);
+    history.push('/billingInfo');
   }
 
   const currency = (num) => {
@@ -65,7 +77,7 @@ export default function CheckOrder() {
     <div className='container orders_check'>
         <h3>購買清單確認</h3>
         <ul className='order'>
-            {cart.map(item => (
+            {cartApi.carts && cartApi.carts.map(item => (
               <CheckItem data={item} key={item.id}></CheckItem>
             ))}
             
@@ -79,8 +91,8 @@ export default function CheckOrder() {
             </li>
         </ul>
         <div className='gocheck'>
-          <button type="button" className="btn-back">繼續購物</button>
-          <button type="button" className="btn-check">填寫資料</button>
+          {/* <button type="button" className="btn-back">繼續購物</button>
+          <button type="button" className="btn-check">填寫資料</button> */}
           <button type="button" className="btn-check btn_confirmcart" onClick={() => handleConfirmCart()}>確認購買</button>
         </div>
         <div className="declare">

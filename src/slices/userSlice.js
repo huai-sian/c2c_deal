@@ -77,6 +77,9 @@ const userSlice = createSlice({
           expired: '',
         };
       }
+    },
+    testConsole() {
+      console.log('dispatch!');
     }
   },
   extraReducers: {
@@ -103,6 +106,6 @@ const userSlice = createSlice({
   }
 })
 
-export const { clearUser, checkExpAuth } = userSlice.actions;
+export const { clearUser, checkExpAuth, testConsole } = userSlice.actions;
 
 export default userSlice.reducer;

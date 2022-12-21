@@ -1,7 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts, renderSeriesList, updateWish, getWishLength, getWishFromLocal, getCurrentSeries } from './../../slices/productsSlice';
-import { addTocart, getCartLength, getCartTotal, pushToCart, removeCart, updateCart, getCartLocal } from './../../slices/cartSlice';
+import { 
+  addTocart, 
+  getCartLength,
+  getCartTotal,
+  pushToCart,
+  removeCart,
+  updateCart,
+  getCartLocal,
+  confirmCart,
+  getCart
+ } from './../../slices/cartSlice';
 import Img from '../../assets/images/vera-cho-10SLUJj6G6w-unsplash.jpg';
 import Loading from './../../components/loading';
 
@@ -22,7 +32,7 @@ import './productList.scss';
 export default function ProductList() {
   const dispatch = useDispatch();
   const history = useHistory();
-  // const { series } = useParams();
+  const { series } = useParams();
 
   const toDetail = (id) => {
     history.push(`/product_detail/${id}`);
@@ -37,15 +47,13 @@ export default function ProductList() {
   }
 
   useEffect(() => {
-    // if(series) {
-    //   dispatch(getCurrentSeries(series))
-    // }
+    console.log(series);
+    if(series) {
+      dispatch(getCurrentSeries(series))
+    }
     dispatch(getProducts(''));
     dispatch(getWishFromLocal());
     dispatch(getWishLength());
-    dispatch(getCartLocal());
-    dispatch(getCartLength());
-    dispatch(getCartTotal());
   }, [])
 
   const addTowish = (e, item) => {
@@ -58,16 +66,13 @@ export default function ProductList() {
   }
 
   const getCartInfo = () => {
-    dispatch(getCartLocal());
-    dispatch(getCartLength());
-    dispatch(getCartTotal());
+    console.log('Dispatch getCart');
+    dispatch(getCart());
   }
 
   const addItem = (e, item, qty = 1) => {
     e.stopPropagation();
-    getCartInfo();
-    dispatch(addTocart({ product: item, qty}));
-    getCartInfo();
+    dispatch(confirmCart({ product: item, qty}));
   }
 
   const isLiked = (want) => {

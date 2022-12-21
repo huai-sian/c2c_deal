@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getOrder, completePay } from './../../slices/orderSlice';
+import { getOrder, completePay, updateIsCompleted } from './../../slices/orderSlice';
 import Visa from '../../assets/images/visa.svg';
 import MasterCard from '../../assets/images/mastercard.svg';
 import Jcb from '../../assets/images/jcb.svg';
@@ -18,6 +18,7 @@ import {
   Redirect
 } from "react-router-dom";
 
+
 import './checkout.scss';
 
 export default function Checkout() {
@@ -31,7 +32,7 @@ export default function Checkout() {
     formState: { errors }
   } = useForm();
 
-  const { order, isPaid, isLoading } = useSelector((store) => store.order);
+  const { order, isPaid, isLoading, isCompleted } = useSelector((store) => store.order);
 
   useEffect(() => {
     console.log(id);
@@ -56,10 +57,16 @@ export default function Checkout() {
 
   useEffect(() => {
     if(isPaid) {
-        dispatch(getOrder(id));
+      dispatch(getOrder(id));
     }
   }, [isPaid]);
 
+  useEffect(() => {
+    if(isCompleted) {
+      history.push(`/checkout/${id}`);
+      dispatch(updateIsCompleted(false));
+    }
+  }, [isCompleted])
 
 
   const currency = (num) => {
@@ -95,7 +102,7 @@ export default function Checkout() {
                                         <div className="pro-qty">{item.qty}</div>
                                     </div>
                                     <div className="col-4 p-0">
-                                        <div className='pro-price'>NT{(Number(item.final)) / (Number(item.qty))}</div>
+                                        <div className='pro-price'>{currency(item.product.price)}</div>
                                     </div>
                                 </div>
                             </li>

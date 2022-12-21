@@ -10,8 +10,13 @@ import { addTocart,
         getCartLocal,
         getCart,
         deleteCart,
-        createOrder
-       } from './../../slices/cartSlice';
+        createOrder,
+        updateOrderCreated,
+        updateIsDeleted,
+        updateCouponSuccess,
+        addCouponCode,
+      } from './../../slices/cartSlice';
+
 import {
         BrowserRouter as Router,
         Switch,
@@ -21,6 +26,7 @@ import {
         useHistory,
         Redirect
       } from "react-router-dom";
+
 import { updateLoading } from './../../slices/orderSlice';
 import Img from '../../assets/images/vera-cho-10SLUJj6G6w-unsplash.jpg';
 import { useForm } from "react-hook-form";
@@ -28,6 +34,7 @@ import { useForm } from "react-hook-form";
 import './billingInfo.scss';
 
 export default function BillingInfo() {
+  const [couponNum, setCouponNum] = useState('');
   const dispatch = useDispatch();
   const history = useHistory();
   const {
@@ -36,19 +43,26 @@ export default function BillingInfo() {
     formState: { errors }
   } = useForm();
 
-  const { cart, cartApi, cartlength, total, orderId } = useSelector((store) => store.cart)
+  const { cart, cartApi, cartlength, total, orderId, isDeleted, orderCreated } = useSelector((store) => store.cart)
 
   const submit = (data) => {
     console.log(data);
     dispatch(createOrder({ user: data }));
-    dispatch(getCartLocal());
-    dispatch(getCartLength());
-    dispatch(getCartTotal());
   }
 
   useEffect(() => {
     dispatch(getCart());
-  }, [])
+    if(cartlength == 0) {
+      history.push(`/productlist`);
+    }
+  }, []);
+
+  useEffect(() => {
+    if(orderCreated) {
+      history.push(`/checkout/${orderId}`);
+      dispatch(updateOrderCreated(false));
+    }
+  }, [orderCreated])
 
   const currency = (num) => {
     const n = Number(num)
@@ -64,6 +78,12 @@ export default function BillingInfo() {
       dispatch(deleteCart(item));
     })
   }
+
+  const submitCouponNum = (couponNum) => {
+    dispatch(addCouponCode(couponNum));
+    dispatch(updateCouponSuccess(false));
+  }
+
 
   return (
     <div className="billinginfo">
@@ -109,9 +129,14 @@ export default function BillingInfo() {
             </ul>
             <div className='my-4 coupon'>
                 <div className='input-group'>
-                    <input type="text" className='form-control' placeholder="請輸入優惠代碼" />
+                    <input
+                      type="text"
+                      className='form-control'
+                      placeholder="請輸入優惠代碼"
+                      onChange={(e) => setCouponNum(e.target.value)}
+                    />
                     <div className='input-group-append'>
-                    <span className='input-group-text coupon-send'>確認</span>
+                      <span className='input-group-text coupon-send' onClick={() => submitCouponNum(couponNum)}>確認</span>
                     </div>
                 </div>
             </div>
@@ -183,7 +208,7 @@ export default function BillingInfo() {
                 <textarea name="" id="comment" className="form-control" cols="10" rows="3" placeholder="歡迎輸入想對我們說的話"></textarea>
               </div>
               <div className='sub_order'>
-                <button onClick={() => deleteCartAll()}>清除購物車</button>
+                <button onClick={() => deleteCartAll()} className='btn-order'>清除購物車</button>
                 <button className='btn-order' type='submit'>下一步</button>
               </div>
             </form>

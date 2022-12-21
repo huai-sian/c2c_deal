@@ -2,25 +2,25 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 
-const url = 'https://vue-course-api.hexschool.io/api/exploreu/admin/orders?page=1';
+const url = 'https://vue-course-api.hexschool.io/api/exploreu/admin/orders';
 
 const initialState = {
   orders: [],
-  isLoading: false
+  isLoading: false,
+  pagination: ''
 };
 
 export const getOrders = createAsyncThunk('user/getOrders',
-  async (param, thunkAPI) => {
+  async (page, thunkAPI) => {
     try {
-      const res = await axios.get(url, {
+      const res = await axios.get(`${url}?page=${page}`, {
         headers: {
           Accept: '*/*',
           'Content-Type': 'application/json'
         }
       });
-      console.log(res.data.orders);
-      return res.data.orders;
-      
+      res.data.orders.splice(0, 1);
+      return res.data;
     } catch(err) {
       return thunkAPI.rejectWithValue('something went wrong');
     }
@@ -41,7 +41,9 @@ const adminOrdersSlice = createSlice({
     },
     [getOrders.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.orders = action.payload;
+      state.orders = action.payload.orders;
+      console.log(state.orders);
+      state.pagination = action.payload.pagination;
     },
     [getOrders.rejected]: (state, action) => {
       state.isLoading = false;

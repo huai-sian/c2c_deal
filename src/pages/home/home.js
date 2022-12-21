@@ -93,25 +93,25 @@ export default function Home() {
               <span>All Series</span>
             </h3>
             <div className="row d-flex justify-content-center align-items-center series-group">
-              <div className="col-12 col-md-6 p-0" onClick={history.push(`/productlist/草本系列`)}>
+              <div className="col-12 col-md-6 p-0" onClick={() => history.push(`/productlist/草本系列`)}>
                 <div className="seriesItem">
                   <img src={Series1} alt="草本系列" />
                   <p>草本系列</p>
                 </div>
               </div>
-              <div className="col-12 col-md-6 p-0">
+              <div className="col-12 col-md-6 p-0" onClick={() => history.push(`/productlist/甜蜜系列`)}>
                 <div className="seriesItem">
                   <img src={Series2} alt="甜蜜系列" />
                   <p>甜蜜系列</p>
                 </div>
               </div>
-              <div className="col-12 col-md-6 p-0">
+              <div className="col-12 col-md-6 p-0" onClick={() => history.push(`/productlist/果香系列`)}>
                 <div className="seriesItem">
                   <img src={Series3} alt="果香系列" />
                   <p>果香系列</p>
                 </div>
               </div>
-              <div className="col-12 col-md-6 p-0">
+              <div className="col-12 col-md-6 p-0" onClick={() => history.push(`/productlist/經典系列`)}>
                 <div className="seriesItem">
                   <img src={Series4} alt="經典系列" />
                   <p>經典系列</p>

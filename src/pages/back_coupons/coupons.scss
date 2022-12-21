@@ -1,0 +1,12 @@
+@import "./../../assets/_utilities.scss";
+@import "./../../assets/_mixin.scss";
+
+.btn-open {
+  background-color: $primary_color;
+  color: white;
+  margin-right: .3rem;
+  &:hover {
+    background-color: #85929E;
+    color: white;
+  }
+}

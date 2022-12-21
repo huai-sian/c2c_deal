@@ -6,6 +6,7 @@ import adminCouponsSlice from './slices/adminCouponsSlice';
 import productsSlice from './slices/productsSlice';
 import cartSlice from './slices/cartSlice';
 import orderSlice from './slices/orderSlice';
+import alertMessageSlice from './slices/alertMessageSlice';
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     adminCoupons: adminCouponsSlice,
     products: productsSlice,
     cart: cartSlice,
-    order: orderSlice
+    order: orderSlice,
+    alertMessage: alertMessageSlice,
   }
 });

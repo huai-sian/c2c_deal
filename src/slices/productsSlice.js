@@ -104,6 +104,7 @@ const productsSlice = createSlice({
       let tempSeries = [];
       tempSeries = state.allSeries.filter((item, i, arr) => arr.indexOf(item) === i);
       state.allSeries = ['全部商品', ...tempSeries];
+      state.allSeries = state.allSeries.filter((item, i, arr) => arr.indexOf(item) === i);
     },
     [getProducts.rejected]: (state, action) => {
       state.isLoading = false;

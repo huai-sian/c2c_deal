@@ -1,7 +1,24 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts, getProduct, renderSeriesList, updateWish, getWishLength, getWishFromLocal } from './../../slices/productsSlice';
-import { addTocart, getCartLength, getCartTotal, pushToCart, removeCart, updateCart, getCartLocal } from './../../slices/cartSlice';
+import { 
+  getProducts,
+  getProduct,
+  renderSeriesList,
+  updateWish,
+  getWishLength,
+  getWishFromLocal
+} from './../../slices/productsSlice';
+import {
+  addTocart,
+  getCartLength,
+  getCartTotal,
+  pushToCart,
+  removeCart,
+  updateCart,
+  getCartLocal,
+  confirmCart,
+  getCart
+ } from './../../slices/cartSlice';
 import Img from '../../assets/images/ajax-loader.gif';
 import Loading from './../../components/loading';
 
@@ -47,15 +64,14 @@ export default function ProductDetail() {
   }
 
   const getCartInfo = () => {
-    dispatch(getCartLocal());
-    dispatch(getCartLength());
-    dispatch(getCartTotal());
+    // dispatch(getCartLocal());
+    // dispatch(getCartLength());
+    // dispatch(getCartTotal());
+    dispatch(getCart());
   }
 
   const addItem = (prod, qty) => {
-    getCartInfo();
-    dispatch(addTocart({ product: prod, qty}));
-    getCartInfo();
+    dispatch(confirmCart({ product: prod, qty}));
   }
 
   if(isLoading) {

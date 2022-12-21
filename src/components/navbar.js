@@ -1,7 +1,26 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts, renderSeriesList, updateWish, getWishLength, getWishFromLocal, deleteWish } from './../slices/productsSlice';
-import { addTocart, getCartLength, getCartTotal, pushToCart, removeCart, updateCart, getCartLocal } from './../slices/cartSlice';
+import { 
+  getProducts,
+  renderSeriesList, 
+  updateWish,
+  getWishLength,
+  getWishFromLocal,
+  getCurrentSeries,
+  deleteWish
+} from './../slices/productsSlice';
+import {
+  addTocart,
+  getCartLength,
+  getCartTotal,
+  pushToCart,
+  removeCart,
+  updateCart,
+  getCartLocal,
+  confirmCart,
+  getCart,
+  deleteCart
+ } from './../slices/cartSlice';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useTranslation } from 'react-i18next';
 
@@ -14,30 +33,34 @@ import {
   Link,
   useParams,
   useRouteMatch,
-  Redirect
+  Redirect,
+  useHistory
 } from "react-router-dom";
 
 export default function Navbar() {
   const { t, i18n } = useTranslation();
   const [wishOpen, setWishOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
-
+  const history = useHistory();
   const dispatch = useDispatch()
 
   const { products, allSeries, wish, wishLength } = useSelector((store) => store.products)
-  const { cart, cartlength, total } = useSelector((store) => store.cart)
+  const { cart, cartApi, cartlength, total } = useSelector((store) => store.cart)
 
   useEffect(() => {
     dispatch(getWishFromLocal())
     dispatch(getWishLength())
-    dispatch(getCartLocal());
-    dispatch(getCartLength());
-    dispatch(getCartTotal());
+    dispatch(getCart());
+    console.log(cartApi);
   }, [])
 
-  const remove = (id) => {
-    dispatch(removeCart(id));
-    dispatch(updateCart());
+  const remove = (item) => {
+    dispatch(deleteCart(item));
+    getCartInfo();
+  }
+
+  const getCartInfo = () => {
+    dispatch(getCart());
   }
 
   const removeWish = (item) => {
@@ -56,6 +79,11 @@ export default function Navbar() {
     setCartOpen(prev => {
       return !prev
     })
+  }
+
+  const addItem = (e, item, qty = 1) => {
+    e.stopPropagation();
+    dispatch(confirmCart({ product: item, qty}));
   }
 
   return (
@@ -91,9 +119,9 @@ export default function Navbar() {
                   <tbody>
                     {wish && wish.map((item, i) => (
                       <tr className="pb-0" key={item.id}>
-                        <td width="10%"><i className="fas fa-shopping-cart"></i></td>
+                        <td width="10%"><i className="fas fa-shopping-cart" onClick={($event) => addItem($event, item)}></i></td>
                         <td><div><img className="img-fluid" src={item.imageUrl}/></div></td>
-                        <td width="50%" className="wish_title">{item.title}</td>
+                        <td width="50%" className="wish_title" onClick={() => history.push(`/product_detail/${item.id}`)}>{item.title}</td>
                         <td width="10%"><span className="close" onClick={() => removeWish(item)}>X</span></td>
                       </tr>
                     ))}
@@ -116,17 +144,17 @@ export default function Navbar() {
               {cartlength == 0 && <h4 className="mb-2">想買的東西放這吧！</h4>}
                 <table className="table-cart table">
                   <tbody>
-                    {cart && cart.map((item, i) => (
+                    {cartApi.carts && cartApi.carts.map((item, i) => (
                       <tr className='pb-0' key={item.id}>
                         <td><div><img 
                           className="img-fluid"
-                          src={item.imageUrl}
-                          alt={item.title}
+                          src={item.product.imageUrl}
+                          alt={item.product.title}
                           style={{width: '3rem'}} /></div></td>
-                        <td className='wish_title'>{item.title}</td>
+                        <td className='wish_title'>{item.product.title}</td>
                         <td>x{item.qty}</td>
-                        <td>{item.origin_price}</td>
-                        <td><span className='close' onClick={() => remove(item.id)}>X</span></td>
+                        <td>{item.total}</td>
+                        <td><span className='close' onClick={() => remove(item)}>X</span></td>
                       </tr>
                     ))}
                   </tbody>

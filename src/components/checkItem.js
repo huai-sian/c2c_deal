@@ -1,7 +1,26 @@
 import { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts, renderSeriesList, updateWish, getWishLength, getWishFromLocal } from './../slices/productsSlice';
-import { addTocart, getCartLength, getCartTotal, pushToCart, removeCart, updateCart, getCartLocal, changeCartnum } from './../slices/cartSlice';
+import { 
+  getProducts,
+  renderSeriesList,
+  updateWish,
+  getWishLength,
+  getWishFromLocal
+ } from './../slices/productsSlice';
+import { 
+  addTocart,
+  getCartLength,
+  getCartTotal,
+  pushToCart,
+  removeCart,
+  updateCart,
+  getCartLocal,
+  changeCartnum,
+  confirmCart,
+  getCart,
+  deleteCart
+} from './../slices/cartSlice';
+
 import {
   Link
 } from "react-router-dom";
@@ -13,9 +32,7 @@ export default function CheckItem({ data }) {
   const [quantity, setQuantity] = useState(1);
 
   const getCartInfo = () => {
-    dispatch(getCartLocal());
-    dispatch(getCartLength());
-    dispatch(getCartTotal());
+    dispatch(getCart());
   }
 
   useEffect(() => {
@@ -25,7 +42,7 @@ export default function CheckItem({ data }) {
   const changeAmount = (prod, qty) => {
     setQuantity(qty);
     getCartInfo();
-    dispatch(changeCartnum({ product: prod, qty: Number(qty)}));
+    dispatch(confirmCart({ product: prod, qty: Number(qty)}));
     getCartInfo();
   }
 
@@ -34,18 +51,23 @@ export default function CheckItem({ data }) {
     changeAmount(prod, amount);
   }
 
+  const remove = (item) => {
+    dispatch(deleteCart(item));
+    getCartInfo();
+  }
+
   return (
-    <li className="pb-3 orderList" key={data.id}>
+    <li className="pb-3 orderList" key={data['product_id']}>
       <div className='row'>
           <div className='col-3 p-0'>
             <div className='pro-img'>
-              <img src={data.imageUrl} alt={data.title} />
+              <img src={data.product.imageUrl} alt={data.product.title} />
             </div>
           </div>
           <div className='col-6 p-0'>
               <div className='row'>
                   <div className='col-12 col-md-6'>
-                      <div className='pro-name'>{data.title}</div>
+                      <div className='pro-name'>{data.product.title}</div>
                   </div>
                   <div className='col-12 col-md-6'>
                       <div className='numControl'>
@@ -66,10 +88,10 @@ export default function CheckItem({ data }) {
               </div>
           </div>
           <div className='col-2 p-0'>
-              <div className='pro_price'>NT {data.origin_price}</div>
+              <div className='pro_price'>NT {data.product.origin_price}</div>
           </div>
           <div className='col-1 p-0'>
-            <div className="pro_del"><i className="fas fa-trash-alt"></i></div>
+            <div className="pro_del"><i className="fas fa-trash-alt" onClick={() => remove(data)}></i></div>
           </div>
       </div>
     </li>
