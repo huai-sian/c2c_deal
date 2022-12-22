@@ -90,7 +90,7 @@ export default function Navbar() {
     <nav className="navbar navbar-expand-lg navbar-total fixed-top">
       <div className="container-fluid">
         <nav className="navbar">
-          <Link to="/">
+          <Link to="/"  className="nav-link">
             <span className="nav-title"><i className="fas fa-praying-hands"></i>Pure Savon</span>
           </Link>
         </nav>

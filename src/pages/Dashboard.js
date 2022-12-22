@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkLoggedIn } from './../slices/userSlice';
+import { checkLoggedIn, checkExpAuth, getTokenFromLocal, getUserFromLocal } from './../slices/userSlice';
 import Orders from './back_orders/orders'
 import Sidebar from './../components/sidebar.js';
 import Products from './back_products/products';
@@ -28,9 +28,12 @@ export default function Dashboard() {
   const token = document.cookie.replace(/(?:(?:^|.*;\s*)pureSavonVuex\s*=\s*([^;]*).*$)|^.*$/, '$1')
   axios.defaults.headers.common.Authorization = `${token}`;
 
-//   useEffect(() => {
-//     dispatch(checkLoggedIn(''));
-// }, [])
+  useEffect(() => {
+    dispatch(getUserFromLocal());
+    dispatch(getTokenFromLocal());
+    console.log(user);
+    dispatch(checkExpAuth());
+}, [])
 
   return (
     <div className="container-fluid">
@@ -43,10 +46,12 @@ export default function Dashboard() {
               {!user.token&& <Redirect to="/login" />}
             </Route>
             <Route path={`${path}/orders`}>
-              <Orders />
+              {user.token&& <Orders></Orders>}
+              {!user.token&& <Redirect to="/login" />}
             </Route>
             <Route path={`${path}/coupons`}>
-              <Coupons />
+              {user.token && <Coupons></Coupons>}
+              {!user.token && <Redirect to="/login" />}
             </Route>
           </Switch>
         </main>

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/jquery/dist/jquery.min.js';
 import '../node_modules/bootstrap/dist/js/bootstrap.min.js';
-import { checkLoggedIn } from './slices/userSlice';
+import { checkLoggedIn, checkExpAuth, getTokenFromLocal, getUserFromLocal } from './slices/userSlice';
 import { useState, useEffect } from 'react';
 import { createBrowserHistory } from 'history';
 
@@ -22,7 +22,10 @@ function App() {
   const history = createBrowserHistory({ basename: '/c2c_deal'});
 
   useEffect(() => {
-    dispatch(checkLoggedIn(''));
+    dispatch(getUserFromLocal());
+    dispatch(getTokenFromLocal());
+    console.log(user);
+    dispatch(checkExpAuth());
   }, [])
 
   return (

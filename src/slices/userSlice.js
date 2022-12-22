@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
+const Swal = require('sweetalert2');
 
 const url = 'https://vue-course-api.hexschool.io/admin/signin';
 
@@ -29,6 +30,8 @@ export const login = createAsyncThunk('user/login',
 
       if(res.data.success) {
         return res.data;
+      } else {
+        return res.data.message;
       }
       
       
@@ -76,11 +79,19 @@ const userSlice = createSlice({
           token: '',
           expired: '',
         };
+        localStorage.removeItem('c2cToken');
+        localStorage.removeItem('c2cUser');
       }
     },
-    testConsole() {
-      console.log('dispatch!');
-    }
+    getTokenFromLocal: (state, action) => {
+      state.user.token = JSON.parse(localStorage.getItem('c2cToken')) || [];
+    },
+    getUserFromLocal: (state, action) => {
+      state.user = JSON.parse(localStorage.getItem('c2cUser')) || [];
+    },
+    removeTokenFromLocal: (state, action) => {
+      localStorage.removeItem('c2cToken');
+    },
   },
   extraReducers: {
     [login.pending]: (state) => {
@@ -88,8 +99,18 @@ const userSlice = createSlice({
     },
     [login.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.user = action.payload;
-      document.cookie = `pureSavonVuex=${action.payload.token};expires=${new Date(action.payload.expired)};`;
+      if(action.payload.token) {
+        state.user = action.payload;
+        document.cookie = `pureSavonVuex=${action.payload.token};expires=${new Date(action.payload.expired)};`;
+        localStorage.setItem('c2cToken', JSON.stringify(action.payload.token));
+        localStorage.setItem('c2cUser', JSON.stringify(action.payload));
+      } else {
+        Swal.fire(
+          '',
+          `${action.payload}`,
+          'info',
+        );
+      }
     },
     [login.rejected]: (state, action) => {
       state.isLoading = false;
@@ -106,6 +127,6 @@ const userSlice = createSlice({
   }
 })
 
-export const { clearUser, checkExpAuth, testConsole } = userSlice.actions;
+export const { clearUser, checkExpAuth, getTokenFromLocal, getUserFromLocal } = userSlice.actions;
 
 export default userSlice.reducer;

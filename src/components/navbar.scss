@@ -16,6 +16,14 @@ body {
     font-size: 1.5rem;
     border: $white_txt;
     margin: 0;
+    text-decoration: none;
+    &:hover {
+      color: $primary_color;
+      text-decoration: none;
+    }
+  }
+  .nav-link {
+    text-decoration: none;
     &:hover {
       color: $primary_color;
       text-decoration: none;
