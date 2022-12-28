@@ -117,7 +117,9 @@ export default function Products() {
 
   return (
     <>
-        <button className="btn btn-primary mb-3" onClick={() => { handleToggle(true); newProduct(); }}>新增產品</button>
+        <div className="d-flex justify-content-end">
+           <button className="btn btn-main mb-3" onClick={() => { handleToggle(true); newProduct(); }}>新增產品</button>
+        </div>
         <table className="table mt-4">
             <thead>
                 <tr>

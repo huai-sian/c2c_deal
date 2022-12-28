@@ -13,3 +13,15 @@
     }
   }
 }
+
+.psd_visible, .psd_invisible {
+  right: 0.5rem;
+	top: calc(50%);
+	transform: translateY(-50%);
+}
+
+.failed .psd_visible, .failed .psd_invisible {
+  right: 0.5rem;
+	top: calc(35%);
+	transform: translateY(-50%);
+}

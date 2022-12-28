@@ -32,7 +32,7 @@ export const getProducts = createAsyncThunk('user/getProducts',
 export const editProduct = createAsyncThunk('user/editProduct',
   async (data, thunkAPI) => {
     try {
-      const res = await axios.put(`${url2}/${data.id}`, data, {
+      const res = await axios.put(`${url2}/${data.data.id}`, data, {
         headers: {
           Accept: '*/*',
           'Content-Type': 'application/json'
@@ -50,7 +50,6 @@ export const editProduct = createAsyncThunk('user/editProduct',
         'info',
       );
       return resProducts.data;
-
     } catch(err) {
       return thunkAPI.rejectWithValue('something went wrong');
     }

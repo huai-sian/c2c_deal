@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkLoggedIn, checkExpAuth, getTokenFromLocal, getUserFromLocal } from './../slices/userSlice';
+import { checkLoggedIn, checkExpAuth, getTokenFromLocal, getUserFromLocal, setTokenLocal } from './../slices/userSlice';
 import Orders from './back_orders/orders'
 import Sidebar from './../components/sidebar.js';
 import Products from './back_products/products';
@@ -21,18 +21,22 @@ import './Dashboard.scss';
 
 export default function Dashboard() {
   const dispatch = useDispatch();
-  const { path } = useRouteMatch();     
+  const { path } = useRouteMatch();
   const { user, loggedIn } = useSelector((store) => store.user);
 
-
-  const token = document.cookie.replace(/(?:(?:^|.*;\s*)pureSavonVuex\s*=\s*([^;]*).*$)|^.*$/, '$1')
-  axios.defaults.headers.common.Authorization = `${token}`;
+  const getToken = () => {
+    return JSON.parse(localStorage.getItem('c2cToken')) || null;
+  }
 
   useEffect(() => {
     dispatch(getUserFromLocal());
-    dispatch(getTokenFromLocal());
-    console.log(user);
+    if(getToken()) {
+      dispatch(getTokenFromLocal(JSON.parse(localStorage.getItem('c2cToken'))));
+    }
     dispatch(checkExpAuth());
+    dispatch(setTokenLocal());
+    const token = document.cookie.replace(/(?:(?:^|.*;\s*)c2cDeal\s*=\s*([^;]*).*$)|^.*$/, '$1')
+    axios.defaults.headers.common.Authorization = `${token}`;
 }, [])
 
   return (

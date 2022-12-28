@@ -2,3 +2,19 @@ $primary_color: #34495E;
 $secondary_color: #85929E;
 $white_txt: white;
 $radius: 6px;
+
+.btn-main {
+  background-color: $primary_color;
+  position: relative;
+  color: $white_txt;
+  border: none;
+  outline: none;
+  padding: 10px 18px;
+  border-radius: $radius;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  &:hover {
+    background-color: $secondary_color;
+    color: $white_txt;
+  }
+}

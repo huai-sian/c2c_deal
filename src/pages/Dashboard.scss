@@ -1,3 +1,6 @@
+@import "./../assets/_utilities.scss";
+@import "./../assets/_mixin.scss";
+
 body {
   font-size: .875rem;
 }
@@ -18,8 +21,24 @@ body {
   bottom: 0;
   left: 0;
   z-index: 100; /* Behind the navbar */
-  padding: 48px 0 0; /* Height of navbar */
+  padding: 24px 0 10px; /* Height of navbar */
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+
+  .nav-title {
+    color: $secondary_color ;
+    font-family: 'EB Garamond', serif;
+    letter-spacing: 1px;
+    font-size: 1.5rem;
+    border: $white_txt;
+    margin: 0;
+    padding-left: 10px;
+    text-decoration: none;
+    &:hover {
+      color: $primary_color;
+      text-decoration: none;
+    }
+  }
+  
 }
 
 .sidebar-sticky {

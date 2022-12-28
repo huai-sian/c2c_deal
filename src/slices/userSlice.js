@@ -72,7 +72,8 @@ const userSlice = createSlice({
       };
     },
     checkExpAuth: (state) => {
-      if (state.user.expired < Math.round(new Date().getTime() / 1000)) {
+      console.log(state.user.expired, Math.round(new Date().getTime()));
+      if (state.user.expired < Math.round(new Date().getTime())) {
         state.user = {
           message: '',
           uid: '',
@@ -84,14 +85,19 @@ const userSlice = createSlice({
       }
     },
     getTokenFromLocal: (state, action) => {
-      state.user.token = JSON.parse(localStorage.getItem('c2cToken')) || [];
+      state.user.token = action.payload;
     },
     getUserFromLocal: (state, action) => {
       state.user = JSON.parse(localStorage.getItem('c2cUser')) || [];
+      console.log(state.user);
     },
     removeTokenFromLocal: (state, action) => {
       localStorage.removeItem('c2cToken');
     },
+    setTokenLocal: (state, action) => {
+      document.cookie = `c2cDeal=${state.user.token};expires=${new Date(state.user.expired)};`;
+      localStorage.setItem('c2cToken', JSON.stringify(state.user.token));
+    }
   },
   extraReducers: {
     [login.pending]: (state) => {
@@ -101,7 +107,8 @@ const userSlice = createSlice({
       state.isLoading = false;
       if(action.payload.token) {
         state.user = action.payload;
-        document.cookie = `pureSavonVuex=${action.payload.token};expires=${new Date(action.payload.expired)};`;
+        console.log(state.user);
+        document.cookie = `c2cDeal=${action.payload.token};expires=${new Date(action.payload.expired)};`;
         localStorage.setItem('c2cToken', JSON.stringify(action.payload.token));
         localStorage.setItem('c2cUser', JSON.stringify(action.payload));
       } else {
@@ -127,6 +134,6 @@ const userSlice = createSlice({
   }
 })
 
-export const { clearUser, checkExpAuth, getTokenFromLocal, getUserFromLocal } = userSlice.actions;
+export const { clearUser, checkExpAuth, getTokenFromLocal, getUserFromLocal, setTokenLocal } = userSlice.actions;
 
 export default userSlice.reducer;

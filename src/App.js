@@ -21,13 +21,6 @@ function App() {
   const { user, loggedIn } = useSelector((store) => store.user);
   const history = createBrowserHistory({ basename: '/c2c_deal'});
 
-  useEffect(() => {
-    dispatch(getUserFromLocal());
-    dispatch(getTokenFromLocal());
-    console.log(user);
-    dispatch(checkExpAuth());
-  }, [])
-
   return (
     <div className="App">
       <BrowserRouter basename={'/c2c_deal'}>
@@ -36,9 +29,8 @@ function App() {
             {user.token && <Redirect to="/dashboard" />}
             {!user.token && <Login />}
           </Route>
-          <Route path="/dashboard" >
-            {!user.token && <Redirect to="/login" />}
-            {user.token && <Dashboard />}
+          <Route path="/dashboard">
+            <Dashboard />
           </Route>
           <Route path="/">
             <Layout />

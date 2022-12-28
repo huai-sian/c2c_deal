@@ -170,7 +170,6 @@ export default function BillingInfo() {
                         pattern: /^09[0-9]{8}$/,
                         message: '請輸入手機號碼格式'
                         })} />
-
                     {errors.tel ?.type === 'required' && <p>請輸入電話號碼</p>}
                   </div>
               </div>

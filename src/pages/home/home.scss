@@ -658,22 +658,6 @@ header {
     opacity: 1;
   }
 }
-.form-signin {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  .btn-signin {
-    background-color: $primary_color;
-    color: $white_txt;
-    &:hover {
-      background-color: $secondary_color;
-    }
-    @include medium {
-      @include unhover;
-    }
-  }
-}
 
 
 

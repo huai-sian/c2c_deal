@@ -81,7 +81,12 @@ export default function Coupons() {
 
   return (
     <>
-        <button className="btn btn-primary mb-3" onClick={() => { handleToggle(true); newCoupon(); }}>新增優惠券</button>
+        <div className="d-flex justify-content-end">
+          <button className="btn btn-main mb-3"
+            onClick={() => { handleToggle(true); newCoupon(); }}>
+            新增優惠券
+          </button>
+        </div>
         <table className="table mt-4">
             <thead>
                 <tr>
