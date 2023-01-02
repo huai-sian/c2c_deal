@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/c2c_deal/static/css/main.ecf25009.css",
-    "main.js": "/c2c_deal/static/js/main.6f6bef4a.js",
+    "main.js": "/c2c_deal/static/js/main.1cefb38d.js",
     "static/js/787.fce3dd5d.chunk.js": "/c2c_deal/static/js/787.fce3dd5d.chunk.js",
     "static/media/matthew-tkocz-q697-Akhwkc-unsplash (2)-min.jpg": "/c2c_deal/static/media/matthew-tkocz-q697-Akhwkc-unsplash (2)-min.14109a43920d9ff4c6f5.jpg",
     "static/media/sincerely-media-zLi4P7nnlsA-unsplash.jpg": "/c2c_deal/static/media/sincerely-media-zLi4P7nnlsA-unsplash.b00528e6c8c56a9dbf40.jpg",
@@ -20,11 +20,11 @@
     "static/media/mastercard.svg": "/c2c_deal/static/media/mastercard.368a7a10da66275b8dc9928e39b3522d.svg",
     "index.html": "/c2c_deal/index.html",
     "main.ecf25009.css.map": "/c2c_deal/static/css/main.ecf25009.css.map",
-    "main.6f6bef4a.js.map": "/c2c_deal/static/js/main.6f6bef4a.js.map",
+    "main.1cefb38d.js.map": "/c2c_deal/static/js/main.1cefb38d.js.map",
     "787.fce3dd5d.chunk.js.map": "/c2c_deal/static/js/787.fce3dd5d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ecf25009.css",
-    "static/js/main.6f6bef4a.js"
+    "static/js/main.1cefb38d.js"
   ]
 }
