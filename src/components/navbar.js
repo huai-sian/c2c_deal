@@ -140,8 +140,8 @@ export default function Navbar() {
             </button>
             {cartOpen && (
               <div className="dropdown-menu dropdown-menu-right dropdown-menu-width p-2">
-              <h4 className="mb-2">購物車</h4>
-              {cartlength == 0 && <h4 className="mb-2">想買的東西放這吧！</h4>}
+              <h4 className="mb-2">{t('cart')}</h4>
+              {cartlength == 0 && <h4 className="mb-2">{t('wish_notice')}</h4>}
                 <table className="table-cart table">
                   <tbody>
                     {cartApi.carts && cartApi.carts.map((item, i) => (
@@ -160,7 +160,7 @@ export default function Navbar() {
                   </tbody>
                 </table>
                 <div className="totalinfo">
-                  <div className="px-4">小計</div>
+                  <div className="px-4">{t('total')}</div>
                   <div className="totalnum">{total}</div>
                   <div className="btn btn-goCart">
                     <Link to="/productlist">
@@ -169,7 +169,7 @@ export default function Navbar() {
                   </div>
                   <div className="btn btn-goCart">
                     <Link to="/checkorders">
-                      結帳去
+                      {t('gocheck')}
                     </Link>
                   </div>
                 </div>

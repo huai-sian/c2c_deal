@@ -15,6 +15,7 @@ import {
   useHistory,
   Redirect
 } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 import Hero1 from './../../assets/images/thanos-pal-v_Cc1qxKuBsmin.jpg';
 import Hero2 from './../../assets/images/duncan-kidd-uwFjCwhXMhE-compress.jpg';
@@ -32,6 +33,7 @@ import backImg from '../../assets/images/draw-4067546_640.png';
 import featureImg from '../../assets/images/sincerely-media-zLi4P7nnlsA-unsplash.jpg'
 
 export default function Home() {
+  const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -53,31 +55,31 @@ export default function Home() {
               <div className="carousel-item active">
                 <img src={Hero1} alt="純粹，從未改變的初衷，獻給渴望簡單的你" />
                 <div className="slide-box"></div>
-                <h2>純粹·Pure Savon</h2>
-                <h3>從未改變的初衷，獻給渴望簡單的你</h3>
-                <p>訂閱電子報，立刻享八折優惠</p>
+                <h2>{t('slogan1')}·Pure Savon</h2>
+                <h3>{t('detail1')}</h3>
+                <p>{t('subscribe')}</p>
                 <Link to="/productlist">
-                  <button type="button" className="carousel-btn">去逛逛</button>
+                  <button type="button" className="carousel-btn">{t('gotoshop')}</button>
                 </Link>
               </div>
               <div className="carousel-item">
                 <img src={Hero2} alt="天然，一口芳香氣息，致大地最原始的氣息" />
                 <div className="slide-box"></div>
-                <h2>天然·Pure Savon</h2>
-                <h3>一口芳香氣息，致大地最原始的氣息</h3>
-                <p>訂閱電子報，立刻享八折優惠</p>
+                <h2>{t('slogan2')}·Pure Savon</h2>
+                <h3>{t('detail2')}</h3>
+                <p>{t('subscribe')}</p>
                 <Link to="/productlist">
-                  <button type="button" className="carousel-btn">去逛逛</button>
+                  <button type="button" className="carousel-btn">{t('gotoshop')}</button>
                 </Link>
               </div>
               <div className="carousel-item">
                 <img src={Hero3} alt="獨特，與肌膚調和，只屬於你的專有香味" />
                 <div className="slide-box"></div>
-                <h2>獨特·Pure Savon</h2>
-                <h3>與肌膚調和，只屬於你的專有香味</h3>
-                <p>訂閱電子報，立刻享八折優惠</p>
+                <h2>{t('slogan3')}·Pure Savon</h2>
+                <h3>{t('detail3')}</h3>
+                <p>{t('subscribe')}</p>
                 <Link to="/productlist">
-                  <button type="button" className="carousel-btn">去逛逛</button>
+                  <button type="button" className="carousel-btn">{t('gotoshop')}</button>
                 </Link>
               </div>
             </div>
@@ -95,26 +97,26 @@ export default function Home() {
             <div className="row d-flex justify-content-center align-items-center series-group">
               <div className="col-12 col-md-6 p-0" onClick={() => history.push(`/productlist/草本系列`)}>
                 <div className="seriesItem">
-                  <img src={Series1} alt="草本系列" />
-                  <p>草本系列</p>
+                  <img src={Series1} alt={t('series1')} />
+                  <p>{t('series1')}</p>
                 </div>
               </div>
               <div className="col-12 col-md-6 p-0" onClick={() => history.push(`/productlist/甜蜜系列`)}>
                 <div className="seriesItem">
-                  <img src={Series2} alt="甜蜜系列" />
-                  <p>甜蜜系列</p>
+                  <img src={Series2} alt={t('series2')} />
+                  <p>{t('series2')}</p>
                 </div>
               </div>
               <div className="col-12 col-md-6 p-0" onClick={() => history.push(`/productlist/果香系列`)}>
                 <div className="seriesItem">
-                  <img src={Series3} alt="果香系列" />
-                  <p>果香系列</p>
+                  <img src={Series3} alt={t('series3')} />
+                  <p>{t('series3')}</p>
                 </div>
               </div>
               <div className="col-12 col-md-6 p-0" onClick={() => history.push(`/productlist/經典系列`)}>
                 <div className="seriesItem">
-                  <img src={Series4} alt="經典系列" />
-                  <p>經典系列</p>
+                  <img src={Series4} alt={t('series4')} />
+                  <p>{t('series4')}</p>
                 </div>
               </div>
             </div>
@@ -128,9 +130,9 @@ export default function Home() {
           </div>
           <div className="col-5 feature_txt">
             <div className="feature_slogan">
-              <h4 className="mb-4">支持永續環境</h4>
-              <h4 className="mb-4">100%天然成分</h4>
-              <h4>無香料及香精</h4>
+              <h4 className="mb-4">{t('feature1')}</h4>
+              <h4 className="mb-4">{t('feature2')}</h4>
+              <h4>{t('feature3')}</h4>
             </div>
           </div>
         </div>
@@ -146,7 +148,7 @@ export default function Home() {
             <div className="secImg"><img src={HotSales1} alt="研磨金盞花之皂" /></div>
             <div className="secContent">
               <h3>研磨金盞花之皂</h3>
-              <p>有效舒緩頭痛及失眠，適用所有膚質，由傳統手工古法製成，100%有機環境保護，微生物可分解，純粹的天然植物油成。</p>
+              <p>{t('topsale1_con')}</p>
               <Link to="/productlist">
                 <button type="button" className="carousel-btn">去逛逛</button>
               </Link>
@@ -156,7 +158,7 @@ export default function Home() {
             <div className="secImg"><img src={HotSales2} alt="普羅旺斯草本之皂" /></div>
             <div className="secContent">
               <h3>普羅旺斯草本之皂</h3>
-              <p>淡淡草本香氛且適用所有肌膚，溫和舒緩，由傳統手工古法製成，天然植物油成份，微生物可分解，100%有機環境保謢。</p>
+              <p>{t('topsale2_con')}</p>
               <Link to="/productlist">
                 <button type="button" className="carousel-btn">去逛逛</button>
               </Link>
@@ -171,7 +173,7 @@ export default function Home() {
               <div className="backimg" style={{backgroundImage: `url(${backImg})`}}></div>
               <div className="consulttxt">
                 <h3>聯絡我們<span>CONTACT US</span></h3>
-                <p>如有任何問題或合作洽談，請留下訊息讓我們知道! 若是對商店有任何建議與回饋，也歡迎留言，讓我們能夠為您提供更好的購物體驗!</p>
+                <p>{t('contacts')}</p>
               </div>
             </div>
             <div className="right col-md-6">
@@ -185,7 +187,7 @@ export default function Home() {
                       <input 
                         type="text"
                         name="name"
-                        placeholder="您的姓名或稱呼"
+                        placeholder={t('form_name_placeholder')}
                         {...register("name", { required: true })} />
                       {errors.name ?.type === 'required' && <p>請輸入姓名</p>}
                     </div>
@@ -195,7 +197,7 @@ export default function Home() {
                       <input 
                         type="email" 
                         name="email" 
-                        placeholder="您的電子信箱"
+                        placeholder={t('form_email_placeholder')}
                         {...register("email", { 
                           required: true, 
                           pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -208,14 +210,14 @@ export default function Home() {
                     <div >
                       <textarea 
                         name="message"
-                        placeholder="想對我們說的話"
+                        placeholder={t('form_message_placeholder')}
                         {...register("message", { required: true })}
                       ></textarea>
                       {errors.message ?.type === 'required' && <p>請輸入文字</p>}
                     </div>
                   </div>
                   <div className="formbtn">
-                    <button className="btn" type="submit">提交</button>
+                    <button className="btn" type="submit">{t('contactSub')}</button>
                   </div>
                 </form>
             </div>

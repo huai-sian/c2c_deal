@@ -27,11 +27,13 @@ import {
   useLocation
 } from "react-router-dom";
 
+import { useTranslation } from 'react-i18next';
 import './productList.scss';
 
 export default function ProductList() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const { t, i18n } = useTranslation();
   const { series } = useParams();
 
   const toDetail = (id) => {
@@ -122,12 +124,12 @@ export default function ProductList() {
               >
                 {!item.is_enabled && (
                   <div className="soldOut">
-                    <h5>售完</h5>
+                    <h5>{t('soldout')}</h5>
                   </div>
                 )}
                 <div className="top">
                   <img src={item.imageUrl} alt={item.title} />
-                  {item.price && <div className="tag">特價中</div>}
+                  {item.price && <div className="tag">{t('onsale')}</div>}
                   {isLiked(item) && <i className="fas fa-heart liked" onClick={($event) => addTowish($event, item)}></i>}
                   {!isLiked(item) && <i className="fas fa-heart" onClick={($event) => addTowish($event, item)}></i>}
                 </div>

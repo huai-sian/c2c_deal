@@ -21,6 +21,7 @@ import {
  } from './../../slices/cartSlice';
 import Img from '../../assets/images/ajax-loader.gif';
 import Loading from './../../components/loading';
+import { useTranslation } from 'react-i18next';
 
 import {
   BrowserRouter as Router,
@@ -36,6 +37,8 @@ import './product_detail.scss';
 
 export default function ProductDetail() {
   const dispatch = useDispatch();
+  const { t, i18n } = useTranslation();
+
   const { id } = useParams();
 
   const [quantity, setQuantity] = useState(1);
@@ -131,41 +134,32 @@ export default function ProductDetail() {
           </div>
         )}
         <div className='product_intro'>
-          <h4 className='mb-4 h4'>使用方式</h4>
+          <h4 className='mb-4 h4'>{t('howtouse_title')}</h4>
           <p className='mb-4'>
-            將手工皂塗抹於沐浴球或沐浴巾，搓揉出泡沫後使用。
-            手工皂直接塗抹於全身，並不會比使用沐浴巾(球)起泡力來的多，
-            也會使手工肥皂快速消耗。 使用完畢後請將手工皂上的水分瀝乾，
-            放入皂盤中使之乾燥，切勿讓皂盤內有積水，方可減低手工皂的溶化速度。
-            置在陰涼通風處、避免潮濕處。
+            {t('howtouse')}
           </p>
-          <h4 className='mb-4 h4'>注意事項</h4>
+          <h4 className='mb-4 h4'>{t('warning_title')}</h4>
           <p className='mb-4'>
-            手工皂上有部分一層白色物質，這是在皂化過程中，
-            接觸到空氣時，所形成的皂粉。正常的現象請不用擔心，
-            用水請洗過一次，白色的皂粉便會消失。 出現黃斑或臭油味可能酸敗，
-            請勿使用!肌膚特別敏感出現不適，應立即停止使用!
+            {t('warning')}
           </p>
-          <h4 className='mb-4 h4'>購買須知</h4>
+          <h4 className='mb-4 h4'>{t('howtouse_title')}</h4>
           <div className="notice">
             <div className='return'>
-                <h4 className='notice_title'><i className="fas fa-exclamation-triangle"></i>退換貨<i className="fas fa-exclamation-triangle"></i></h4>
-                <p className='notice_txt'>退換貨處理期間，請留存發票並保持商品整體完整，若商品已拆封，
-                或是因消費者對商品的不當處理及保存方式錯誤而造成商品損壞變質，則本公司將有保留退換貨的權利。</p>
+                <h4 className='notice_title'><i className="fas fa-exclamation-triangle"></i>{t('noticesub1')}<i className="fas fa-exclamation-triangle"></i></h4>
+                <p className='notice_txt'>{t('noticesub1_con')}</p>
             </div>
             <div className='aware'>
-                <h4 className='notice_title'><i className="fas fa-exclamation-triangle"></i>退款方式<i className="fas fa-exclamation-triangle"></i></h4>
-                <p className='notice_txt'>需提供您的匯款資料（存摺封面）E-mail 至客服中心，
-                退款申請後預計7-10天(不含假日)退還至您指定的帳戶中。</p>
+                <h4 className='notice_title'><i className="fas fa-exclamation-triangle"></i>{t('noticesub2')}<i className="fas fa-exclamation-triangle"></i></h4>
+                <p className='notice_txt'>{t('noticesub2_con')}</p>
             </div>
             <div className='ship'>
-                <h4 className='notice_title'><i className="fas fa-exclamation-triangle"></i>運送方式<i className="fas fa-exclamation-triangle"></i></h4>
-                <p className='notice_txt'>於商店訂購不限金額免運。目前無法提供海外地區配送服務，不便之處，敬請見諒。</p>
+                <h4 className='notice_title'><i className="fas fa-exclamation-triangle"></i>{t('noticesub3')}<i className="fas fa-exclamation-triangle"></i></h4>
+                <p className='notice_txt'>{t('noticesub3_con')}</p>
             </div>
           </div>
         </div>
         <div className='related'>
-          <h3>相關產品</h3>
+          <h3>{t('related')}</h3>
           <hr />
           <div className="related_content row">
             {relatedProducts && relatedProducts.map(item => (
@@ -173,7 +167,7 @@ export default function ProductDetail() {
                 <div className='productCard'>
                   <div className='top'>
                     <img src={item.imageUrl} alt={item.title} />
-                    <div className='tag'>特價中</div>
+                    <div className='tag'>{t('onsale')}</div>
                   </div>
                   <div className='bottom'>
                     <h3>{item.title}</h3>

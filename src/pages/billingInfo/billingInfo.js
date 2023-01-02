@@ -30,6 +30,7 @@ import {
 import { updateLoading } from './../../slices/orderSlice';
 import Img from '../../assets/images/vera-cho-10SLUJj6G6w-unsplash.jpg';
 import { useForm } from "react-hook-form";
+import { useTranslation } from 'react-i18next';
 
 import './billingInfo.scss';
 
@@ -37,6 +38,7 @@ export default function BillingInfo() {
   const [couponNum, setCouponNum] = useState('');
   const dispatch = useDispatch();
   const history = useHistory();
+  const { t, i18n } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -88,7 +90,7 @@ export default function BillingInfo() {
   return (
     <div className="billinginfo">
       <div className="container_fix">
-        <h3>收件人資訊</h3>
+        <h3>{t('Billinginfo_step_title')}</h3>
         <div className='row mb-4'>
           <div className="col-12 col-md-5">
             <ul className='order'>
@@ -120,8 +122,8 @@ export default function BillingInfo() {
               ))}
                 <li className='pt-4'>
                     <div className='row summary'>
-                        <div className='col-6 p-0'>共{cartlength}項</div>
-                        <div className='col-2 p-0'>總計</div>
+                        <div className='col-6 p-0'>{t('checkorder_inTotal')} {cartlength} {t('checkorder_itemCh')}</div>
+                        <div className='col-2 p-0'>{t('Billinginfo_summary')}</div>
                         <div className='col-3 p-0'>NT{currency(cartApi.total)}</div>
                         <div className='col-1 p-0'></div>
                     </div>
@@ -136,7 +138,7 @@ export default function BillingInfo() {
                       onChange={(e) => setCouponNum(e.target.value)}
                     />
                     <div className='input-group-append'>
-                      <span className='input-group-text coupon-send' onClick={() => submitCouponNum(couponNum)}>確認</span>
+                    <span className='input-group-text coupon-send' onClick={() => submitCouponNum(couponNum)}>{t('Billinginfo_coupon_sub')}</span>
                     </div>
                 </div>
             </div>
@@ -146,7 +148,7 @@ export default function BillingInfo() {
               <div className='form-row'>
                   <div className='form-group col-sm-6'>
                     <label htmlFor="buyer-name">
-                      收件人姓名<span className='marker'>*</span>
+                      {t('Billinginfo_form_name')}<span className='marker'>*</span>
                     </label>
                     <input 
                       type="text" 
@@ -158,7 +160,7 @@ export default function BillingInfo() {
                   </div>
                   <div className='form-group col-sm-6'>
                     <label htmlFor="buyer-tel">
-                      收件人手機號碼<span className='marker'>*</span>
+                      {t('Billinginfo_form_tel')}<span className='marker'>*</span>
                     </label>
                     <input 
                       type="text" 
@@ -187,28 +189,28 @@ export default function BillingInfo() {
                   </div>
                   <div className='form-group col-sm-6'>
                       <div>
-                          <label htmlFor="buyer-pay">付款方式</label>
+                          <label htmlFor="buyer-pay">{t('Billinginfo_form_pay')}</label>
                           <select name="payment" id="buyer-pay" className='form-control' {...register("payment", { required: true })}>
-                              <option value="CVS">信用卡付款</option>
-                              <option value="CTP">ATM轉帳付款</option>
+                              <option value="CVS">{t('Billinginfo_pay_op1')}</option>
+                              <option value="CTP">{t('Billinginfo_pay_op2')}</option>
                           </select>
                       </div>
                   </div>
               </div>
             
                 <div className="form-group">
-                <label htmlFor="buyeraddress">收件人地址<span className='marker'>*</span>
+                <label htmlFor="buyeraddress">{t('Billinginfo_form_adr')}<span className='marker'>*</span>
                 </label>
                 <input type="text" className="form-control" name="address" id="buyeraddress" placeholder="請輸入地址" {...register("address", { required: true })} />
                 {errors.address ?.type === 'required' && <p>請輸入收件人地址</p>}
               </div>
               <div className='form-group'>
-                <label htmlFor="comment">備註</label>
+                <label htmlFor="comment">{t('Billinginfo_form_comment')}</label>
                 <textarea name="" id="comment" className="form-control" cols="10" rows="3" placeholder="歡迎輸入想對我們說的話"></textarea>
               </div>
               <div className='sub_order'>
-                <button onClick={() => deleteCartAll()} className='btn-order'>清除購物車</button>
-                <button className='btn-order' type='submit'>下一步</button>
+                <button onClick={() => deleteCartAll()} className='btn-order'>{t('Billinginfo_remove_cart')}</button>
+                <button className='btn-order' type='submit'>{t('Billinginfo_next_btn')}</button>
               </div>
             </form>
           </div>

@@ -34,6 +34,9 @@ export default function Footer() {
                 <div className="lang_select">
                   <span onClick={() => i18n.changeLanguage('en')}>English</span>
                 </div>
+                <Link to="/login"  className="nav-link mt-3">
+                  <span>管理員登入</span>
+                </Link>
               </Col>
           </Row>
           <span className='copyRight'>&#169;僅個人作品練習無商業用途</span>
