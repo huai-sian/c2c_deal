@@ -243,42 +243,42 @@ export default function Home() {
         </div>
       </div>
       <div className="modal fade" id="couponModal" tabIndex='-1' role='dialog' aria-hidden='true' data-backdrop='static'>
-      <div className="modal-dialog modal-dialog-centered">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title text-light" id="exampleModalLabel">Pure Savon</h5>
-            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div className="modal-body">
-            <div className='modalContent'>
-              <p>2022週年慶！立即輸入Email，訂閱電子報，即可獲取購物優惠折扣碼喔！</p>
-                <form>
-                  <div className="form-group">
-                    <div>
-                      <input 
-                        type="email"
-                        name="c_email"
-                        placeholder="您的電子信箱"
-                        className="form-control"
-                      />
-                    </div>
-                  </div>
-                  <button type="submit" className="btn btn-secondary">訂閱</button>
-                </form>
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title text-light" id="exampleModalLabel">Pure Savon</h5>
+              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-            <div className="modalContent">
-              <p>訂閱成功!! 結帳時，請別忘記輸入下方優惠代碼以取得折扣~!</p>
-              <div className="coupon">
-                <div className="backimg"></div>
-                <h3>輸入優惠代碼：<strong>PURE2022</strong><br/>即享8折優惠</h3>
+            <div className="modal-body">
+              <div className='modalContent'>
+                <p>2022週年慶！立即輸入Email，訂閱電子報，即可獲取購物優惠折扣碼喔！</p>
+                  <form>
+                    <div className="form-group">
+                      <div>
+                        <input 
+                          type="email"
+                          name="c_email"
+                          placeholder="您的電子信箱"
+                          className="form-control"
+                        />
+                      </div>
+                    </div>
+                    <button type="submit" className="btn btn-secondary">訂閱</button>
+                  </form>
+              </div>
+              <div className="modalContent">
+                <p>訂閱成功!! 結帳時，請別忘記輸入下方優惠代碼以取得折扣~!</p>
+                <div className="coupon">
+                  <div className="backimg"></div>
+                  <h3>輸入優惠代碼：<strong>PURE2022</strong><br/>即享8折優惠</h3>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
     </div>
   )
 }

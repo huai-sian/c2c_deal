@@ -72,8 +72,8 @@ export default function Login() {
             <input type="checkbox" value="remember-me" /> Remember me
           </label>
         </div>
-        <button className="btn btn-lg btn-block btn-signin" type="submit">Sign in</button>
-        <p className="mt-5 mb-3 text-muted">&copy; 2022 Pure Savon</p>
+      <button className="btn btn-lg btn-block btn-signin" type="submit">Sign in</button>
+      <p className="mt-5 mb-3 text-muted">&copy; 2022 Pure Savon</p>
     </form>
   )
 }

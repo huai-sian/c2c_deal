@@ -33,11 +33,7 @@ body {
     position: relative;
   }
   .dropdown-menu {
-    position: absolute;
-    right: .5rem;
-    top: 2rem;
-    height: fit-content;
-    display: block;
+    left: -250px;
   }
 }
 .navContent .dropdown .disabled {

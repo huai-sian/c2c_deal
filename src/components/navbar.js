@@ -103,44 +103,46 @@ export default function Navbar() {
             </Link>
           </div>
           <div className="dropdown ml-md-5 ml-1">
-            <button 
+            <button
               type="button"
-              className="btn-heart"
+              className="btn-heart dropdown-toggle"
               id="wishList"
+              type="button" data-bs-toggle="dropdown" aria-expanded="false"
               onClick={() => handleWishOpen()}>
               <i className="fas fa-heart"></i>
               <span className="badge">{wishLength}</span>
             </button>
-            {wishOpen && (
-              <div className="dropdown-menu dropdown-menu-right dropdown-menu-width p-2">
-                {wishLength > 0 && <h4 className="mb-2">{t('wishlist')}</h4>}
-                {wishLength == 0 && <h4 className="mb-2">{t('wish_notice')}</h4>}
-                <table className="table-cart table">
-                  <tbody>
-                    {wish && wish.map((item, i) => (
-                      <tr className="pb-0" key={item.id}>
-                        <td width="10%"><i className="fas fa-shopping-cart" onClick={($event) => addItem($event, item)}></i></td>
-                        <td><div><img className="img-fluid" src={item.imageUrl}/></div></td>
-                        <td width="50%" className="wish_title" onClick={() => history.push(`/product_detail/${item.id}`)}>{item.title}</td>
-                        <td width="10%"><span className="close" onClick={() => removeWish(item)}>X</span></td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
+            
+            <div className="dropdown-menu dropdown-menu-right dropdown-menu-width p-2">
+              {wishLength > 0 && <h4 className="mb-2">{t('wishlist')}</h4>}
+              {wishLength == 0 && <h4 className="mb-2">{t('wish_notice')}</h4>}
+              <table className="table-cart table">
+                <tbody>
+                  {wish && wish.map((item, i) => (
+                    <tr className="pb-0" key={item.id}>
+                      <td width="10%"><i className="fas fa-shopping-cart" onClick={($event) => addItem($event, item)}></i></td>
+                      <td><div><img className="img-fluid" src={item.imageUrl}/></div></td>
+                      <td width="50%" className="wish_title" onClick={() => history.push(`/product_detail/${item.id}`)}>{item.title}</td>
+                      <td width="10%"><span className="close" onClick={() => removeWish(item)}>X</span></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          
           </div>
           <div className="dropdown ml-md-5">
             <button 
               type="button"
-              className="btn-cart"
+              className="btn-cart dropdown-toggle"
               id="cartList"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
               onClick={() => handleCartOpen()}>
               <i className="fas fa-shopping-cart"></i><span className="badge">{cartlength}</span>
             </button>
-            {cartOpen && (
               <div className="dropdown-menu dropdown-menu-right dropdown-menu-width p-2">
-              <h4 className="mb-2">{t('cart')}</h4>
+                <h4 className="mb-2">{t('cart')}</h4>
               {cartlength == 0 && <h4 className="mb-2">{t('wish_notice')}</h4>}
                 <table className="table-cart table">
                   <tbody>
@@ -174,7 +176,6 @@ export default function Navbar() {
                   </div>
                 </div>
               </div>
-            )}
           </div>
         </div>
       </div>
