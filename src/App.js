@@ -20,7 +20,7 @@ function App() {
   const dispatch = useDispatch();
   const { user, loggedIn } = useSelector((store) => store.user);
   const history = createBrowserHistory({ basename: '/c2c_deal'});
-
+  
   return (
     <div className="App">
       <BrowserRouter basename={'/c2c_deal'}>

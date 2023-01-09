@@ -39,8 +39,6 @@ import {
 
 export default function Navbar() {
   const { t, i18n } = useTranslation();
-  const [wishOpen, setWishOpen] = useState(false);
-  const [cartOpen, setCartOpen] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch()
 
@@ -69,17 +67,6 @@ export default function Navbar() {
     dispatch(getWishLength());
   }
 
-  const handleWishOpen = () => {
-    setWishOpen(prev => {
-      return !prev
-    })
-  }
-
-  const handleCartOpen = () => {
-    setCartOpen(prev => {
-      return !prev
-    })
-  }
 
   const addItem = (e, item, qty = 1) => {
     e.stopPropagation();
@@ -108,7 +95,7 @@ export default function Navbar() {
               className="btn-heart dropdown-toggle"
               id="wishList"
               type="button" data-bs-toggle="dropdown" aria-expanded="false"
-              onClick={() => handleWishOpen()}>
+            >
               <i className="fas fa-heart"></i>
               <span className="badge">{wishLength}</span>
             </button>
@@ -132,13 +119,13 @@ export default function Navbar() {
           
           </div>
           <div className="dropdown ml-md-5">
-            <button 
+            <button
               type="button"
               className="btn-cart dropdown-toggle"
               id="cartList"
               data-bs-toggle="dropdown"
               aria-expanded="false"
-              onClick={() => handleCartOpen()}>
+            >
               <i className="fas fa-shopping-cart"></i><span className="badge">{cartlength}</span>
             </button>
               <div className="dropdown-menu dropdown-menu-right dropdown-menu-width p-2">

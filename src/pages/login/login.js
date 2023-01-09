@@ -23,6 +23,9 @@ export default function Login() {
   } = useForm();
 
   const getToken = () => {
+    if(localStorage.getItem('c2cToken') == 'undefined') {
+      return null
+    }
     return JSON.parse(localStorage.getItem('c2cToken')) || null;
   }
 

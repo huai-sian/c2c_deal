@@ -25,6 +25,9 @@ export default function Dashboard() {
   const { user, loggedIn } = useSelector((store) => store.user);
 
   const getToken = () => {
+    if(localStorage.getItem('c2cToken') == 'undefined') {
+      return null
+    }
     return JSON.parse(localStorage.getItem('c2cToken')) || null;
   }
 
@@ -32,9 +35,9 @@ export default function Dashboard() {
     dispatch(getUserFromLocal());
     if(getToken()) {
       dispatch(getTokenFromLocal(JSON.parse(localStorage.getItem('c2cToken'))));
+      dispatch(checkExpAuth());
+      dispatch(setTokenLocal());
     }
-    dispatch(checkExpAuth());
-    dispatch(setTokenLocal());
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)c2cDeal\s*=\s*([^;]*).*$)|^.*$/, '$1')
     axios.defaults.headers.common.Authorization = `${token}`;
 }, [])
