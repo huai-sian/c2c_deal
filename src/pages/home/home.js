@@ -188,8 +188,8 @@ export default function Home() {
                         type="text"
                         name="name"
                         placeholder={t('form_name_placeholder')}
-                        {...register("name", { required: true })} />
-                      {errors.name ?.type === 'required' && <p>請輸入姓名</p>}
+                        {...register("name", { required: '請輸入姓名' })} />
+                      {errors.name && <p className="errorMsg">{errors.name.message}</p>}
                     </div>
                   </div>
                   <div className="form-group">
@@ -199,11 +199,13 @@ export default function Home() {
                         name="email" 
                         placeholder={t('form_email_placeholder')}
                         {...register("email", { 
-                          required: true, 
-                          pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                          message: '請輸入 Email格式'
-                          })} />
-                        {errors.email ?.type === 'required' && <p>請輸入 Email</p>}
+                          required: '請輸入 Email', 
+                          pattern: {
+                            value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                            message: '請輸入 Email格式'
+                          }
+                      })} />
+                        {errors.email && <p className="errorMsg">{errors.email.message}</p>}
                     </div>
                   </div>
                   <div className="form-group">
@@ -211,9 +213,9 @@ export default function Home() {
                       <textarea 
                         name="message"
                         placeholder={t('form_message_placeholder')}
-                        {...register("message", { required: true })}
+                        {...register("message", { required: '請輸入文字' })}
                       ></textarea>
-                      {errors.message ?.type === 'required' && <p>請輸入文字</p>}
+                      {errors.message && <p className="errorMsg">{errors.message.message}</p>}
                     </div>
                   </div>
                   <div className="formbtn">

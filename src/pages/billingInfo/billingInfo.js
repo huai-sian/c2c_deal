@@ -154,9 +154,10 @@ export default function BillingInfo() {
                       type="text" 
                       id="buyer-name" 
                       className='form-control'
-                      {...register("name", { required: true })}
-                      placeholder="請輸入姓名" />
-                    {errors.name ?.type === 'required' && <p>請輸入姓名</p>}
+                      placeholder={t('form_name_placeholder')}
+                      {...register("name", { required: '請輸入姓名' })}
+                    />
+                    {errors.name && <p className="errorMsg">{errors.name.message}</p>}
                   </div>
                   <div className='form-group col-sm-6'>
                     <label htmlFor="buyer-tel">
@@ -168,11 +169,13 @@ export default function BillingInfo() {
                       className='form-control' 
                       placeholder="請輸入手機號碼" 
                       {...register("tel", { 
-                        required: true,
-                        pattern: /^09[0-9]{8}$/,
-                        message: '請輸入手機號碼格式'
+                        required: '請輸入電話號碼',
+                        pattern: {
+                          value: /^09[0-9]{8}$/,
+                          message: '請輸入手機號碼格式'
+                        }
                         })} />
-                    {errors.tel ?.type === 'required' && <p>請輸入電話號碼</p>}
+                    {errors.tel && <p className="errorMsg">{errors.tel.message}</p>}
                   </div>
               </div>
               <div className='form-row'>
@@ -180,12 +183,15 @@ export default function BillingInfo() {
                   <label htmlFor="buyer-email">Email<span className='marker'>*</span>
                   </label>
                   <input type="email" className="form-control" name="email" id="buyer-email"
-                      placeholder="請輸入 Email" {...register("email", { 
-                        required: true, 
-                        pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                        message: '請輸入 Email格式'
-                        })} />
-                    {errors.email ?.type === 'required' && <p>請輸入 Email</p>}
+                      placeholder="請輸入 Email" 
+                      {...register("email", { 
+                        required: '請輸入 Email', 
+                        pattern: {
+                          value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                          message: '請輸入 Email格式'
+                        }
+                      })} />
+                    {errors.email && <p className="errorMsg">{errors.email.message}</p>}
                   </div>
                   <div className='form-group col-sm-6'>
                       <div>
@@ -201,8 +207,11 @@ export default function BillingInfo() {
                 <div className="form-group">
                 <label htmlFor="buyeraddress">{t('Billinginfo_form_adr')}<span className='marker'>*</span>
                 </label>
-                <input type="text" className="form-control" name="address" id="buyeraddress" placeholder="請輸入地址" {...register("address", { required: true })} />
-                {errors.address ?.type === 'required' && <p>請輸入收件人地址</p>}
+                <input type="text" className="form-control" 
+                  name="address" id="buyeraddress" 
+                  placeholder="請輸入地址"
+                  {...register("address", { required: '請輸入收件人資訊' })} />
+                {errors.address && <p className="errorMsg">{errors.address.message}</p>}
               </div>
               <div className='form-group'>
                 <label htmlFor="comment">{t('Billinginfo_form_comment')}</label>

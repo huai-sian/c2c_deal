@@ -77,7 +77,7 @@ export default function CheckOrder() {
 
   return (
     <div className='container orders_check'>
-        <h3>{t('step1_title')}</h3>
+        <h3>{t('checkorder_step_title')}</h3>
         <ul className='order'>
             {cartApi.carts && cartApi.carts.map(item => (
               <CheckItem data={item} key={item.id}></CheckItem>

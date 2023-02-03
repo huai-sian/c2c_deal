@@ -177,12 +177,14 @@ export default function Checkout() {
                                 id="card_number"
                                 placeholder="xxxx-xxxx-xxxx-xxxx"
                                 {...register('cardNum', {
-                                    required: true,
-                                    pattern: /^\d{4}-\d{4}-\d{4}-\d{4}$/,
-                                    massage: '請輸入正確卡號格式'
+                                    required: '請輸入信用卡號',
+                                    pattern: {
+                                        value: /^\d{4}-\d{4}-\d{4}-\d{4}$/,
+                                        message: '請輸入正確卡號格式'
+                                    }
                                 })}
                             />
-                            {errors.cardNum ?.type === 'required' && <p>請輸入信用卡卡號</p>}
+                            {errors.cardNum && <p className="errorMsg">{errors.cardNum.message}</p>}
                             </div>
                             <div className="form-group">
                             <label htmlFor="card_owner">{t('Checkout_card_owner')}<span className='marker'>*</span>
@@ -194,10 +196,10 @@ export default function Checkout() {
                                 id="card_owner"
                                 placeholder="請輸入英文姓名"
                                 {...register('cardOwner', {
-                                    required: true,
+                                    required: '請輸入持卡人姓名',
                                 })}
                             />
-                            {errors.cardOwner ?.type === 'required' && <p>請輸入持卡人英文姓名</p>}
+                            {errors.cardOwner && <p className="errorMsg">{errors.cardOwner.message}</p>}
                             </div>
                             <div className="form-group">
                             <label htmlFor="expired">
@@ -212,23 +214,26 @@ export default function Checkout() {
                                 placeholder="MM/YY"
                                 className="form-control"
                                 {...register('expired', {
-                                    validate: value => {
-                                    const MMYY = value.split('/');
-                                    const inputMon = MMYY[0];
-                                    const inputYear = MMYY[1];
-                                    const months = ['01','02','03','04','05','06','07','08','09','10','11','12'];
-                                    const now = new Date();
-                                    const nowYear = now.getFullYear().toString();
-                                    if(months.indexOf(inputMon) < 0) {
-                                        return '請輸入正確日期'
-                                    } else if(inputYear < nowYear.substring(2,4)) {
-                                        return '請輸入正確日期';
-                                    } else {
-                                        return true;
-                                    }
+                                    validate: {
+                                        checkDate: (value) => {
+                                            const MMYY = value.split('/');
+                                            const inputMon = MMYY[0];
+                                            const inputYear = MMYY[1];
+                                            const months = ['01','02','03','04','05','06','07','08','09','10','11','12'];
+                                            const now = new Date();
+                                            const nowYear = now.getFullYear().toString();
+                                            if(months.indexOf(inputMon) < 0) {
+                                                return '請輸入正確日期'
+                                            } else if(inputYear < nowYear.substring(2,4)) {
+                                                return '請輸入正確日期';
+                                            } else {
+                                                return true;
+                                            }
+                                        }
                                     }
                                 })}
                             />
+                            {errors.expired && <p className="errorMsg">{errors.expired.message}</p>}
                             </div>
                             <div className="form-group">
                                 <label htmlFor="verifyNum">
@@ -242,10 +247,10 @@ export default function Checkout() {
                                 name="verifyNum"
                                 id="verifyNum"
                                 {...register('verifyNum', {
-                                    required: true
+                                    required: '請輸入驗證碼'
                                 })}
                                 />
-                                {errors.verifyNum ?.type === 'required' && <p>請輸入驗證碼</p>}
+                                {errors.verifyNum && <p className="errorMsg">{errors.verifyNum.message}</p>}
                             </div>
                             <div className="endpay">
                                 <button type="submit">{t('Checkout_go_paid')}</button>

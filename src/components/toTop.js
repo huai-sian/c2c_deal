@@ -14,7 +14,7 @@ export default function Totop() {
       behavior: "smooth"
     });
   }
-
+  // ref
   window.addEventListener('scroll', function() {
     const scrolled = document.documentElement.scrollTop;
     if (scrolled > 300){
