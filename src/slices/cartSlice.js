@@ -1,11 +1,11 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { updateMessage, removeMessage } from './alertMessageSlice';
-import axios from 'axios';
-const Swal = require('sweetalert2');
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { updateMessage, removeMessage } from "./alertMessageSlice";
+import axios from "axios";
+const Swal = require("sweetalert2");
 
-const url = 'https://vue-course-api.hexschool.io/api/exploreu/cart';
-const url2 = 'https://vue-course-api.hexschool.io/api/exploreu/coupon';
-const url3 = 'https://vue-course-api.hexschool.io/api/exploreu/order';
+const url = "https://vue-course-api.hexschool.io/api/exploreu/cart";
+const url2 = "https://vue-course-api.hexschool.io/api/exploreu/coupon";
+const url3 = "https://vue-course-api.hexschool.io/api/exploreu/order";
 
 const initialState = {
   isLoading: false,
@@ -15,115 +15,106 @@ const initialState = {
   total: 0,
   addToCart: false,
   couponSuccess: false,
-  orderId: '',
+  orderId: "",
   isDeleted: false,
   orderCreated: false,
   cartConfirmed: false,
 };
 
-export const getCart = createAsyncThunk('cart/getCart',
+export const getCart = createAsyncThunk(
+  "cart/getCart",
   async (page, thunkAPI) => {
     try {
       const res = await axios.get(url);
-      if(res.data.success) {
+      if (res.data.success) {
         return res.data.data;
       }
-    } catch(err) {
-      return thunkAPI.rejectWithValue('something went wrong');
+    } catch (err) {
+      return thunkAPI.rejectWithValue("something went wrong");
     }
   }
-)
+);
 
-export const confirmCart = createAsyncThunk('cart/confirmCart',
-  async ({product, qty}, thunkAPI) => {
+export const confirmCart = createAsyncThunk(
+  "cart/confirmCart",
+  async ({ product, qty }, thunkAPI) => {
     try {
       const cartinfo = {
         product_id: product.id,
-        qty: qty
-      }
-      const res = await axios.post(url, {data: cartinfo});
+        qty: qty,
+      };
+      const res = await axios.post(url, { data: cartinfo });
       const resCart = await axios.get(url);
-      Swal.fire(
-        '',
-        `${res.data.message}`,
-        'info',
-      );
+      Swal.fire("", `${res.data.message}`, "info");
       // thunkAPI.dispatch(updateMessage({ message: res.data.message, status: 'danger'}));
-      if(resCart.data.success) {
+      if (resCart.data.success) {
         return resCart.data.data;
       } else {
-        return 'failed'
+        return "failed";
       }
-    } catch(err) {
+    } catch (err) {
       console.log(err);
     }
   }
-)
+);
 
-export const createOrder = createAsyncThunk('cart/createOrder',
+export const createOrder = createAsyncThunk(
+  "cart/createOrder",
   async (order, thunkAPI) => {
     try {
-      const res = await axios.post(url3, {data: order});
+      const res = await axios.post(url3, { data: order });
 
       // thunkAPI.dispatch(updateMessage({ message: res.data.message, status: 'danger'}));
-      if(res.data.success) {
+      if (res.data.success) {
         return res.data.orderId;
       }
-      
-    } catch(err) {
-      return thunkAPI.rejectWithValue('something went wrong');
+    } catch (err) {
+      return thunkAPI.rejectWithValue("something went wrong");
     }
   }
-)
+);
 
-export const deleteCart = createAsyncThunk('cart/deleteCart',
+export const deleteCart = createAsyncThunk(
+  "cart/deleteCart",
   async (item, thunkAPI) => {
     try {
-      const res = await axios.delete(`${url}/${item['product_id']}`);
+      const res = await axios.delete(`${url}/${item["product_id"]}`);
       const resCart = await axios.get(url);
-      Swal.fire(
-        '',
-        `${res.data.message}`,
-        'info',
-      );
+      Swal.fire("", `${res.data.message}`, "info");
       // thunkAPI.dispatch(updateMessage({ message: res.data.message, status: 'danger'}));
-      if(resCart.data.success) {
+      if (resCart.data.success) {
         return resCart.data.data;
       } else {
-        return 'failed'
+        return "failed";
       }
-    } catch(err) {
+    } catch (err) {
       console.log(err);
     }
   }
-)
+);
 
-export const addCouponCode = createAsyncThunk('cart/addCouponCode',
+export const addCouponCode = createAsyncThunk(
+  "cart/addCouponCode",
   async (couponNum, thunkAPI) => {
     const coupon = { code: couponNum };
     try {
       const res = await axios.post(url2, { data: coupon });
       console.log(res.data.message);
-      Swal.fire(
-        '',
-        `${res.data.message}`,
-        'info',
-      );
+      Swal.fire("", `${res.data.message}`, "info");
       // thunkAPI.dispatch(updateMessage({ message: res.data.message, status: 'danger'}));
-      if(res.data.success) {
+      if (res.data.success) {
         return true;
       } else {
         return false;
       }
-      
-    } catch(err) {
-      return thunkAPI.rejectWithValue('something went wrong');
+    } catch (err) {
+      return thunkAPI.rejectWithValue("something went wrong");
     }
   }
-)
+);
 
 const cartSlice = createSlice({
-  name: 'cart',
+  name: "cart",
   initialState,
   reducers: {
     addTocart: (state, action) => {
@@ -131,83 +122,92 @@ const cartSlice = createSlice({
       if (state.cart.length > 0) {
         state.cart.forEach((item, index) => {
           if (item.id === action.payload.product.id) {
-            productIndex = index
+            productIndex = index;
           }
-        })
+        });
       }
       if (productIndex === -1) {
-        const total = parseInt((action.payload.product.origin_price * action.payload.qty), 10)
-        let tempProduct = { ...action.payload.product }
+        const total = parseInt(
+          action.payload.product.origin_price * action.payload.qty,
+          10
+        );
+        let tempProduct = { ...action.payload.product };
         tempProduct.qty = parseInt(action.payload.qty, 10);
-        tempProduct.total = total
-        state.cart.push(tempProduct)
+        tempProduct.total = total;
+        state.cart.push(tempProduct);
       } else {
-        let tempProduct =  { ...state.cart[productIndex]}
+        let tempProduct = { ...state.cart[productIndex] };
         tempProduct.qty += parseInt(action.payload.qty, 10);
-        const total = parseInt((action.payload.product.origin_price * action.payload.qty), 10)
-        tempProduct.total += total
-        state.cart.splice(productIndex, 1)
-        state.cart.push(tempProduct)
+        const total = parseInt(
+          action.payload.product.origin_price * action.payload.qty,
+          10
+        );
+        tempProduct.total += total;
+        state.cart.splice(productIndex, 1);
+        state.cart.push(tempProduct);
       }
-      localStorage.setItem('cart', JSON.stringify(state.cart))
+      localStorage.setItem("cart", JSON.stringify(state.cart));
     },
     changeCartnum: (state, action) => {
       // action.payload.product
       // action.payload.qty
       let productIndex;
       let num = action.payload.qty;
-      if(state.cart.length > 0) {
+      if (state.cart.length > 0) {
         state.cart.forEach((item, idx) => {
-          if(item.id === action.payload.product.id) {
+          if (item.id === action.payload.product.id) {
             productIndex = idx;
           }
-        })
+        });
       }
-      if(action.payload.qty >= 10) {
+      if (action.payload.qty >= 10) {
         num = 10;
         state.cart[productIndex].qty = num;
-      } else if(action.payload.qty <= 1) {
+      } else if (action.payload.qty <= 1) {
         num = 1;
         state.cart[productIndex].qty = num;
       } else {
         num = action.payload.qty;
         state.cart[productIndex].qty = num;
       }
-      const total = parseInt((state.cart[productIndex].origin_price * state.cart[productIndex].qty), 10);
+      const total = parseInt(
+        state.cart[productIndex].origin_price * state.cart[productIndex].qty,
+        10
+      );
       state.cart[productIndex].total = total;
-      localStorage.setItem('cart', JSON.stringify(state.cart));
+      localStorage.setItem("cart", JSON.stringify(state.cart));
     },
     getCartLength: (state) => {
-      state.cartlength = 0
-      state.cart.forEach(item =>{
+      state.cartlength = 0;
+      state.cart.forEach((item) => {
         state.cartlength += parseInt(item.qty, 10);
-      })
+      });
     },
     getCartTotal: (state) => {
-      state.total = 0
+      state.total = 0;
       state.cart.forEach((item) => {
-        state.total += item.total
-      })
+        state.total += item.total;
+      });
     },
     pushToCart: (state, action) => {
-      state.cart.push(action.payload)
+      state.cart.push(action.payload);
     },
     removeCart: (state, action) => {
-      let removingIndex = -1
+      let removingIndex = -1;
       if (state.cart.length > 0) {
         state.cart.forEach((item, index) => {
           if (item.id === action.payload.id) {
-            removingIndex = index
+            removingIndex = index;
           }
-        })
+        });
       }
-      state.cart.splice(removingIndex, 1) 
+      state.cart.splice(removingIndex, 1);
     },
     updateCart: (state) => {
-      localStorage.setItem('cart', JSON.stringify(state.cart))
+      localStorage.setItem("cart", JSON.stringify(state.cart));
     },
     getCartLocal: (state) => {
-      state.cart = JSON.parse(localStorage.getItem('cart')) || []
+      state.cart = JSON.parse(localStorage.getItem("cart")) || [];
     },
     updateCartConfirmed: (state, action) => {
       state.cartConfirmed = action.payload;
@@ -229,8 +229,12 @@ const cartSlice = createSlice({
     [getCart.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.cartApi = action.payload;
-      state.cartlength = action.payload.carts.length;
-      state.total = action.payload['final_total'];
+      state.total = action.payload["final_total"];
+      let length = 0;
+      action.payload.carts.forEach((item) => {
+        length += parseInt(item.qty, 10);
+        state.cartlength = length;
+      });
       console.log(state.cartlength, state.total, state.cartApi);
     },
     [getCart.rejected]: (state, action) => {
@@ -244,8 +248,12 @@ const cartSlice = createSlice({
       state.addToCart = true;
       state.cartConfirmed = true;
       state.cartApi = action.payload;
-      state.cartlength = action.payload.carts.length;
-      state.total = action.payload['final_total'];
+      state.total = action.payload["final_total"];
+      let length = 0;
+      action.payload.carts.forEach((item) => {
+        length += parseInt(item.qty, 10);
+        state.cartlength = length;
+      });
       console.log(state.cartlength, state.total);
     },
     [confirmCart.rejected]: (state, action) => {
@@ -259,8 +267,8 @@ const cartSlice = createSlice({
       state.isLoading = false;
       state.orderId = action.payload;
       console.log(state.orderId);
-      localStorage.removeItem('cart');
-      state.cart = JSON.parse(localStorage.getItem('cart')) || [];
+      localStorage.removeItem("cart");
+      state.cart = JSON.parse(localStorage.getItem("cart")) || [];
       state.cartlength = 0;
       state.total = 0;
       state.orderCreated = true;
@@ -276,8 +284,12 @@ const cartSlice = createSlice({
       state.isLoading = false;
       state.isDeleted = true;
       state.cartApi = action.payload;
-      state.cartlength = action.payload.carts.length;
-      state.total = action.payload['final_total'];
+      state.total = action.payload["final_total"];
+      let length = 0;
+      action.payload.carts.forEach((item) => {
+        length += parseInt(item.qty, 10);
+        state.cartlength = length;
+      });
       state.cartConfirmed = false;
     },
     [deleteCart.rejected]: (state, action) => {
@@ -295,24 +307,22 @@ const cartSlice = createSlice({
       state.isLoading = false;
       state.couponSuccess = false;
     },
-  }
-})
+  },
+});
 
-export const 
-  { 
-    addTocart,
-    changeCartnum,
-    getCartLength,
-    getCartTotal,
-    pushToCart,
-    removeCart,
-    updateCart,
-    getCartLocal,
-    updateCartConfirmed,
-    updateOrderCreated,
-    updateIsDeleted,
-    updateCouponSuccess
-  } = cartSlice.actions;
+export const {
+  addTocart,
+  changeCartnum,
+  getCartLength,
+  getCartTotal,
+  pushToCart,
+  removeCart,
+  updateCart,
+  getCartLocal,
+  updateCartConfirmed,
+  updateOrderCreated,
+  updateIsDeleted,
+  updateCouponSuccess,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;
-
